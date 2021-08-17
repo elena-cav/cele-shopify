@@ -1,0 +1,98 @@
+<footer class="footer-section bg-light py-5 mt-5">
+
+    <div class="container">
+        <div class="row row-cols-{{section.settings.col_num}}">
+            {% for block in section.blocks %}
+                {% assign item = block.settings %}
+                {% if block.type == "link_list" %}
+                    <div class="col">
+                        <h4>{{item.title}}</h4>
+                        {% assign footer_linklist = item.menu %}
+                        <ul class="list-unstyled text-small">
+                            {% for link in linklists[footer_linklist].links %}
+                                <li>
+                                    <a href="{{link.url}}">{{link.title | escape}}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% else if block.type == "text" %}
+                    <div class="col">
+                        <img src="{{item.logo | img_url: 'medium'}}" class="mb-5">
+                        <h4>{{item.title}}</h4>
+                        <p>{{item.description}}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</footer>
+
+{{ 'bootstrap.min.js' | asset_url | script_tag }}
+{{ 'application.js' | asset_url | script_tag }}
+
+{% schema %}
+{
+    "name": "Footer",
+    "settings": [
+      {
+          "type": "range",
+          "id": "col_num",
+          "default": 3,
+          "min": 2,
+          "max": 4,
+          "label": "Numero di colonne"
+      }  
+    ],
+"max_blocks": 4,
+   "blocks": [
+   {
+       "type": "link_list",
+       "name": "Navigazione",
+       "settings": [
+           {
+               "type": "text",
+               "id": "title",
+               "label": "Titolo",
+               "default": "Links del footer"
+           },
+           {
+            "type": "link_list",
+            "id": "menu",
+            "label": "Menu"
+           }
+       ]
+   },
+   {
+       "type": "text",
+       "name": "Informazioni sul negozio",
+       "settings": [
+           {
+               
+                   "type": "image_picker",
+                   "id": "logo",
+                   "label": "Logo del negozio"
+               },
+               {
+               
+                "type": "text",
+                "id": "title",
+                "label": "Titolo",
+                "default": "Informazioni"
+            },
+            {
+               
+                "type": "richtext",
+                "id": "description",
+                "label": "Testo"
+            }
+        
+        
+           
+       ]
+
+   }
+   
+   ]
+}
+{% endschema %}
