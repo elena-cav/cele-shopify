@@ -1,11 +1,11 @@
 {
   "general": {
     "404": {
-      "title": "Not found",
-      "subtext_html": "The page you were looking for does not exist"
+      "title": "Non trovato",
+      "subtext_html": "La pagina che stai cercando non esiste"
     },
     "Cart": {
-      "title": "Cart"
+      "title": "Carrello"
     },
     "Blog": {
       "title": "Blog"
@@ -13,8 +13,8 @@
     "Layout": {
       "login_text": "Login",
       "logout_text": "Logout",
-      "register_text": "Register",
-      "account_text": "Account"
+      "register_text": "Registrati",
+      "account_text": "User"
     }
   }
 }

@@ -1,1 +1,28 @@
 <!-- /templates/customers/activate_account.liquid -->
+<div class="container my-5">
+    <h1 class="lead">Attiva l'account</h1>
+    <div class="row">
+        {% form 'activate_customer_password' %}
+            {% include 'form-error', form: form %}
+
+            <div class="col-12">
+                <label class="form-label" for="activate_password1">Password</label>
+                <input class="form-control" id="activate_password1" name="customer[password]" type="password">
+            </div>
+            <div class="col-12">
+                <label class="form-label" for="activate_password2">Conferma la password</label>
+                <input class="form-control" id="activate_password2" name="customer[password_confirmation]" type="password">
+            </div>
+
+            <div class="col-12">
+                <button class="btn btn-primary w-100 rounded-0" type="submit">Attiva l'Account</button>
+            </div>
+
+            <p class="text-center">o</p>
+
+            <div class="col-12">
+                <input class="btn btn-primary w-100 rounded-0" name="decline" type="submit" value="Declina l'invito">
+            </div>
+        {% endform %}
+    </div>
+</div>
