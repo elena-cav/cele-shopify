@@ -1,0 +1,92 @@
+<div class="container">
+    {% paginate collection.products by 20 %}
+        <div class="row my-5">
+            <h1 class="text-center">{{ collection.title }}</h1>
+        </div>
+
+        <div class="row justify-content-center">
+            <select class="sort-form form-select form-select-sm w-25 rounded-0" id="sort_by" name="sorting">
+                {% for option in collection.sort_options %}
+                    <option value="{{ option.value }}" {% if option.value == collection.sort_by %} selected {% endif %}>{{ option.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="product-list-container">
+
+            {% for product in collection.products %}
+                {% assign image = product.featured_media.preview_image %}
+                <script>console.log({{product|json}})</script>
+                <div class="product-card">
+                    <a href="{{ product.url }}">
+                        {% if image != blank %}
+                            <div class="img-container">
+
+                                <a href="#" id="productInfoAnchor" product-handle="{{ product.handle }}" product-price="{{ product.price | money_without_trailing_zeros }}">
+                                    <img class="product-list-image" src="{{ image | img_url: 'medium' }}" alt="{{ product.title }}">
+                                </a>
+                            </div>
+
+                        {% else %}
+                            <div class="img-container">
+
+                                <a href="#" id="productInfoAnchor" product-handle="{{ product.handle }}" product-price="{{ product.price | money_without_trailing_zeros }}">
+                                    {{ 'product-1' | placeholder_svg_tag: 'card-img-top' }}
+                                </a>
+                            </div>
+
+
+                        {% endif %}
+
+                        <div class="product-detail-container">
+                            <p class="text-small">{{product.vendor}}</p>
+                            <h6>{{ product.title }}</h6>
+                            <span class="text-danger font-weight-bold">{{ product.price | money_without_trailing_zeros }}</span>
+                        </div>
+
+                        <!-- <div class="mt-3"></div> <button class="btn btn-danger btn-block">Buy Now</button> </div> -->
+
+                    </a>
+                </div>
+
+
+            {% else %}
+                <p>Nessun risultato</p>
+            {% endfor %}
+        </div>
+
+
+        {% render 'pagination', paginate: paginate %}
+
+    {% endpaginate %}
+</div>
+
+
+<!-- <div aria-hidden="true" class="modal fade" id="productInfoModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <img alt="" class="img-fluid" id="productInfoImg" src="">
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <h1 id="productInfoTitle"></h1>
+                        <h3 id="productInfoPrice"></h3>
+                        <p id="productInfoDescription"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <form action="#" class="row" id="addToCartForm">
+                    <select class="form-select col-auto" id="modalItemID" name="id"></select>
+                    <input class="col-auto" id="modalItemQuantity" min="1" name="quantity" type="number" value="1">
+                    <button class="btn btn-success col-auto" type="submit">Add to cart</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->

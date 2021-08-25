@@ -1,11 +1,23 @@
 <!-- /templates/customers/account.liquid -->
 <div class="container my-5">
     <h1 class="mb-3">Account</h1>
+    <div class="d-block p-2 bg-light text-black text-center">
+        <h6>
+            Ciao
+            {{customer.first_name}}
+        </h6>
+        <h6>Non sei tu?
+            <a href="{{ routes.account_logout_url }}">Log Out</a>
+        </h6>
+
+
+    </div>
+
     <div class="row">
         <div class="col-12 col-md-4">
-            <h6>Account details</h6>
+            <h6>Dettagli dell'account</h6>
             {{customer.default_address | format_address}}
-            <a href="{{ routes.account_addresses_url }}" class="btn btn-ligh">Visualizza indirizzi</a>
+            <a href="{{ routes.account_addresses_url }}" class="btn btn-light">Visualizza indirizzi</a>
             <span class="badge bg-success">{{customer.addresses_count}}</span>
         </div>
         <div class="col-12 col-md-8"></div>

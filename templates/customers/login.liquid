@@ -8,10 +8,14 @@
             <label for="password">Password</label>
             <input class="form-control rounded-0 my-2" name="customer[password]" type="password">
 
-            <input class="btn btn-primary btn-lg w-100 rounded-0" type="submit" value="Sign in">
+            <input class="font-weight-bold btn btn-light text-black btn-lg w-100 rounded-0" type="submit" value="Sign in">
         {% endform %}
 
         <a class="text-center" href="#recover" id="forgotPassword">Hai dimenticato la password?</a>
+        <button class="font-weight-bold btn btn-light text-black btn-lg w-100 rounded-0">
+            <a class="nav-link" href="{{ routes.account_register_url }}">Registrati</a>
+        </button>
+
     </div>
     <div class="forgot-password-form d-none" id="forgot_password_form">
         {% form 'recover_customer_password' %}

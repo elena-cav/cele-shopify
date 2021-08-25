@@ -1,4 +1,75 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<header class="nav-header">
+    <div class="nav-container">
+        <div class="brand">
+            <h2>Cele</h2>
+        </div>
+
+        <div class="mobile-nav">
+            <button class="menu-btn pull-right">
+                <div class="menu-btn__burger"></div>
+            </button>
+        </div>
+
+
+        <nav class="nav-bar">
+            <ul class="nav-menu">
+                <li class="menu-item has-sub-menu">
+                    <a href="#">Donna</a>
+                    <ul class="sub-menu">
+                        <li class="menu-item">
+                            <a href="">Abbigliamento</a>
+                        </li>
+                        <li class="menu-item has-sub-menu">
+                            <a href="">Designer</a>
+                            <ul class="sub-menu">
+                                {% for product_vendor in shop.vendors %}
+                                    <li class="menu-item">
+                                        <a href="">{{ product_vendor}}</a>
+                                    </li>
+                                    <!-- {{ product_vendor | link_to_vendor }} -->
+                                {% endfor %}
+
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="#">Accessori</a>
+                </li>
+                <li class="menu-item">
+                    <a href="#">Scarpe
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+
+        <div class="icons-section">
+            <button class="search-icon"><img alt="" src="{{ 'search.svg' | asset_url }}"></button>
+            {% if shop.customer_accounts_enabled %}
+                {% if customer %}
+                    <button class="user-icon">
+                        <a href="{{ routes.account_url }}"><img alt="" src="{{ 'user.svg' | asset_url }}"></a>
+                    </button>
+
+                {% else %}
+                    <button class="user-icon">
+                        <a href="{{ routes.account_login_url }}"><img alt="" src="{{ 'user.svg' | asset_url }}"></a>
+                    </button>
+
+                {% endif %}
+            {% endif %}
+            <button class="bag-icon">
+                <a href="/cart"><img alt="" src="{{ 'bag.svg' | asset_url }}"></a>
+            </button>
+        </div>
+    </div>
+</header>
+
+
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="#">Navbar</a>
         <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
@@ -15,7 +86,8 @@
                         [
                         {% for childlink in linklists[child_list_handle].links %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
+                                <a class="nav-link" id="searchInputField" href="{{ childlink.url }}">{{ childlink.title | escape }}
+                                </a>
                             </li>
                         {% endfor %}]
                     {% else %}
@@ -25,8 +97,8 @@
                     {% endif %}
                 {% endfor %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/cart">Cart
-                        <span class="badge bg-danger rounded-pill" id="numberOfCartItems">0</span>
+                    <a class="nav-link" href="/cart">Carrello
+                        <span class="badge bg-danger rounded-pill" id="numberOfCartItems"></span>
                     </a>
                 </li>
             </ul>
@@ -59,8 +131,8 @@
 
 <div aria-labelledby="offcanvasLabel" class="offcanvas offcanvas-end" id="offcanvasSearchResult" tabindex="-1">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasLabel">Product Search Result</h5>
+        <h5 class="offcanvas-title" id="offcanvasLabel">Risultati della ricerca</h5>
         <button aria-label="Close" class="btn-close text-reset" data-bs-dismiss="offcanvas" type="button"></button>
     </div>
     <div class="offcanvas-body" id="search_results_body"></div>
-</div>
+</div> -->
