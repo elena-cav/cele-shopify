@@ -9,14 +9,14 @@
         "button_label": "Learn more",
         "button_link": "https://google.com/"
       }
-    },
-    "featured-collection": {
-      "type": "featured-collection",
-      "settings": {
-        "featured_collection": "summer-collection",
-        "title": "Collezione in evidenza"
-      }
     }
   },
-  "order": ["hero", "featured-collection"]
+  "order": ["hero"]
 }
+// "featured-collection": {
+//   "type": "featured-collection",
+//   "settings": {
+//     "featured_collection": "summer-collection",
+//     "title": "Collezione in evidenza"
+//   }
+// }

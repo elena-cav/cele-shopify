@@ -1,7 +1,9 @@
 <header class="nav-header">
     <div class="nav-container">
         <div class="brand">
-            <h2>Cele</h2>
+            <a class="nav-link" href="/">
+                <h2>Cele</h2>
+            </a>
         </div>
 
         <div class="mobile-nav">
@@ -17,7 +19,7 @@
                     <a href="#">Donna</a>
                     <ul class="sub-menu">
                         <li class="menu-item">
-                            <a href="">Abbigliamento</a>
+                            <a href={{routes.all_products_collection_url }}>Abbigliamento</a>
                         </li>
                         <li class="menu-item has-sub-menu">
                             <a href="">Designer</a>
@@ -31,6 +33,7 @@
 
                             </ul>
                         </li>
+
                     </ul>
                 </li>
                 <li class="menu-item">
@@ -41,12 +44,16 @@
                     </a>
                 </li>
 
+
             </ul>
 
         </nav>
 
 
         <div class="icons-section">
+            <form action="/search" class="search-bar-lg" method="GET" role="search">
+                <input placeholder="Cerca per parola chiave" type="text" name="q" value="{{ search.terms | escape }}" id="searchInputField">
+            </form>
             <button class="search-icon"><img alt="" src="{{ 'search.svg' | asset_url }}"></button>
             {% if shop.customer_accounts_enabled %}
                 {% if customer %}
@@ -65,6 +72,15 @@
                 <a href="/cart"><img alt="" src="{{ 'bag.svg' | asset_url }}"></a>
             </button>
         </div>
+    </div>
+    <div class="search-bar">
+        <img class="search-bar-icons" alt="" src="{{ 'search.svg' | asset_url }}">
+        <form action="/search" method="GET" role="search">
+            <input class="search-bar-input" placeholder="Cerca per parola chiave" type="text" name="q" value="{{ search.terms | escape }}" id="searchInputField">
+        </form>
+        <button id="close-searchbar"><img class="search-bar-icons" alt="" src="{{ 'close.svg' | asset_url }}"></button>
+
+
     </div>
 </header>
 
@@ -103,23 +119,7 @@
                 </li>
             </ul>
             <ul class="navbar-nav">
-                {% if shop.customer_accounts_enabled %}
-                    {% if customer %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ routes.account_url }}">{{ 'general.Layout.account_text' | t }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ routes.account_logout_url }}">{{ 'general.Layout.logout_text' | t }}</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ routes.account_login_url }}">{{ 'general.Layout.login_text' | t }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ routes.account_register_url }}">{{ 'general.Layout.register_text' | t }}</a>
-                        </li>
-                    {% endif %}
-                {% endif %}
+          
                 <li class="nav-item"></li>
             </ul>
             <form action="/search" method="GET" role="search">

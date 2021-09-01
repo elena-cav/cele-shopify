@@ -37,12 +37,14 @@
 
 
                         {% endif %}
+                        <a href={{product.url}}>
+                            <div class="product-detail-container">
+                                <p class="text-small">{{product.vendor}}</p>
+                                <h6>{{ product.title }}</h6>
+                                <span class="text-danger font-weight-bold">{{ product.price | money_without_trailing_zeros }}</span>
+                            </div>
+                        </a>
 
-                        <div class="product-detail-container">
-                            <p class="text-small">{{product.vendor}}</p>
-                            <h6>{{ product.title }}</h6>
-                            <span class="text-danger font-weight-bold">{{ product.price | money_without_trailing_zeros }}</span>
-                        </div>
 
                         <!-- <div class="mt-3"></div> <button class="btn btn-danger btn-block">Buy Now</button> </div> -->
 

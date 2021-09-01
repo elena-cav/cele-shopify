@@ -1,11 +1,17 @@
 // Put your styles in this file.
 // Shopify will compile SCSS/SASS on each deploy.
 // Note: "@import" rules aren’t supported.
-html,
 body {
   font-family: "Nunito", sans-serif;
+  padding-top: 110px;
 }
-
+img {
+  object-fit: cover;
+}
+a {
+  text-decoration: none;
+  color: #000000 !important;
+}
 h1,
 h2,
 h3,
@@ -32,7 +38,28 @@ ul {
   width: 100%;
   height: 400px;
 }
+.hero-btn {
+  color: white;
+  background-color: rgba(#000, 0.3);
+  font-weight: 600;
+  letter-spacing: 0.3rem;
+  transition: 0.4s ease-in-out;
 
+  &:hover {
+    background-color: rgba(#000, 0.6);
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.3;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
 .inner-hero-section img,
 .inner-hero-section svg {
   position: absolute;
@@ -41,8 +68,22 @@ ul {
   width: 100%;
   height: 100%;
   overflow: cover;
-  z-index: -1;
-  object-position: center;
+  z-index: -2;
+}
+.hero-subsection {
+  position: relative;
+  overflow: hidden;
+  height: 500px;
+}
+.hero-subsection img,
+.hero-subsection svg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  overflow: cover;
+  z-index: -2;
 }
 
 .login-form,
@@ -94,14 +135,14 @@ ul {
 
 .nav-header {
   background-color: #f5f5f5;
-}
-
-.nav-header {
-  background-color: #f5f5f5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 998;
 
   .nav-container {
     position: relative;
-
     max-width: 960px;
     padding: 15px;
     margin: 0 auto;
@@ -110,24 +151,24 @@ ul {
     justify-content: space-between;
 
     .brand {
+      position: fixed;
+      top: 15px;
+      left: 20px;
+      @media screen and (max-width: 767px) {
+        top: 35px;
+        left: 50%;
+      }
       h2 {
         color: black;
         font-size: 28px;
         font-weight: 900;
       }
-      @media screen and (max-width: 767px) {
-        position: fixed;
-        top: 35px;
-        left: 50%;
-      }
     }
 
     .mobile-nav {
       display: none;
-    }
 
-    @media screen and (max-width: 767px) {
-      .mobile-nav {
+      @media screen and (max-width: 767px) {
         display: flex;
         justify-content: flex-end;
       }
@@ -138,8 +179,9 @@ ul {
         display: flex;
         list-style-type: none;
         position: fixed;
-        left: 80px;
-        top: 10px;
+        left: 100px;
+        top: 20px;
+
         .menu-item {
           position: relative;
 
@@ -166,7 +208,7 @@ ul {
                 display: block;
                 position: absolute;
                 top: 50%;
-                right: 15px;
+                left: 100px;
                 transform: translateY(-50%);
                 color: #005f73;
                 font-size: 18px;
@@ -207,14 +249,17 @@ ul {
 
                 .sub-menu {
                   top: 0;
-                  right: 100%;
+                  left: 100%;
+
+                  @media screen and (max-width: 767px) {
+                    left: 0;
+                  }
                 }
               }
             }
           }
         }
       }
-
       @media screen and (max-width: 767px) {
         display: block;
         position: absolute;
@@ -237,7 +282,10 @@ ul {
 
         .nav-menu {
           flex-direction: column;
-          margin: 5rem 4rem 0 4rem;
+          position: fixed;
+          top: 85px;
+          right: 20px;
+          text-align: right;
 
           .has-sub-menu {
             > .sub-menu {
@@ -272,6 +320,9 @@ ul {
     height: 80px;
     cursor: pointer;
     z-index: 999;
+    // position: fixed;
+    // top: 35px;
+    // left: 25px;
   }
 
   .menu-btn__burger {
@@ -314,25 +365,66 @@ ul {
   .menu-btn.open .menu-btn__burger::after {
     transform: rotate(-45deg) translate(35px, 35px);
   }
-}
-.user-icon,
-.bag-icon,
-.search-icon {
-  width: 20px;
-  height: 20px;
-  z-index: 999;
-  margin-left: 6px;
 
-  img svg {
-    height: 20px;
-    width: 20px;
+  .search-bar {
+    background-color: #f5f5f5;
+    height: 110px;
+    width: 100%;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    justify-content: space-evenly;
+    transform: translateY(-200px);
+    transition: all 0.5s ease-in-out;
+    z-index: 999;
+    align-items: center;
+    padding: 0 6rem 0 6rem;
+
+    &.is-active {
+      transform: translateY(0px);
+    }
+    form {
+      display: flex;
+      justify-content: center;
+      width: 90%;
+    }
+    .search-bar-icons {
+      width: 20px;
+      height: 20px;
+    }
+    .search-bar-input {
+      width: 80%;
+      border: none;
+      padding: 5px;
+    }
   }
-}
-.search-icon {
-  display: none;
-}
-@media screen and (max-width: 767px) {
+
+  .user-icon,
+  .bag-icon,
   .search-icon {
+    width: 20px;
+    height: 20px;
+    z-index: 998;
+    margin-left: 6px;
+
+    img svg {
+      height: 20px;
+      width: 20px;
+    }
+  }
+
+  .search-bar-lg {
+    padding: 5px 5px;
     display: inline-block;
+    @media screen and (max-width: 767px) {
+      display: none;
+    }
+  }
+  .search-icon {
+    display: none;
+    @media screen and (max-width: 767px) {
+      display: inline-block;
+    }
   }
 }

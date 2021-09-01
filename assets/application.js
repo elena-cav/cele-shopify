@@ -177,14 +177,27 @@ if (document.getElementById("forgotPassword") != null) {
 // }
 
 const menu_btn = document.querySelector(".menu-btn");
-// const close_menu = document.querySelector(".close-menu");
 const navbar = document.querySelector(".nav-bar");
 
 menu_btn.addEventListener("click", toggleMenu);
-// close_menu.addEventListener("click", toggleMenu);
 
 function toggleMenu() {
   console.log("in here");
   navbar.classList.toggle("is-active");
   menu_btn.classList.toggle("open");
+}
+
+const search_icon = document.querySelector(".search-icon");
+const search_bar = document.querySelector(".search-bar");
+const close_search_bar = document.getElementById("close-searchbar");
+search_icon.addEventListener("click", openSearchBar);
+close_search_bar.addEventListener("click", closeSearchBar);
+function openSearchBar() {
+  console.log("in search");
+  console.log(search_bar);
+  search_bar.classList.add("is-active");
+}
+
+function closeSearchBar() {
+  search_bar.classList.remove("is-active");
 }
