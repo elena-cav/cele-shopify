@@ -22,11 +22,16 @@
                             <a href={{routes.all_products_collection_url }}>Abbigliamento</a>
                         </li>
                         <li class="menu-item has-sub-menu">
-                            <a href="">Designer</a>
+                            <a>Designer</a>
                             <ul class="sub-menu">
                                 {% for product_vendor in shop.vendors %}
                                     <li class="menu-item">
-                                        <a href="">{{ product_vendor}}</a>
+
+                                        {% if product_vendor != "Cele Boutique Alghero" %}
+                                            <a href="/collections/vendors?q={{product_vendor | downcase }}">{{ product_vendor }}</a>
+
+                                        {% endif %}
+
                                     </li>
                                     <!-- {{ product_vendor | link_to_vendor }} -->
                                 {% endfor %}
@@ -37,11 +42,23 @@
                     </ul>
                 </li>
                 <li class="menu-item">
-                    <a href="#">Accessori</a>
+                    <a href="/collections/types?q=Accessori">Accessori</a>
                 </li>
                 <li class="menu-item">
-                    <a href="#">Scarpe
+                    <a href="/collections/types?q=Scarpe">Scarpe
                     </a>
+                </li>
+                <li class="menu-item has-sub-menu">
+                    <a>Scopri</a>
+                    <ul class="sub-menu">
+                        <li class="menu-item">
+                            <a href="/products/consulenza-online?variant=40425888415916">Consulenza</a>
+                            <a href="">La nostra storia</a>
+                            <a href="">Il negozio</a>
+
+                        </li>
+
+                    </ul>
                 </li>
 
 
@@ -51,9 +68,15 @@
 
 
         <div class="icons-section">
-            <form action="/search" class="search-bar-lg" method="GET" role="search">
-                <input placeholder="Cerca per parola chiave" type="text" name="q" value="{{ search.terms | escape }}" id="searchInputField">
-            </form>
+            <div class="search-bar">
+                <img class="search-bar-icon" alt="" src="{{ 'search.svg' | asset_url }}">
+                <form action="/search" method="GET" role="search">
+                    <input class="search-bar-input" id="searchInputField" placeholder="Cerca per parola chiave" type="text" name="q" value="{{ search.terms | escape }}">
+                </form>
+                <button id="close-searchbar"><img class="close-search-bar-icon" alt="" src="{{ 'close.svg' | asset_url }}"></button>
+
+
+            </div>
             <button class="search-icon"><img alt="" src="{{ 'search.svg' | asset_url }}"></button>
             {% if shop.customer_accounts_enabled %}
                 {% if customer %}
@@ -73,66 +96,12 @@
             </button>
         </div>
     </div>
-    <div class="search-bar">
-        <img class="search-bar-icons" alt="" src="{{ 'search.svg' | asset_url }}">
-        <form action="/search" method="GET" role="search">
-            <input class="search-bar-input" placeholder="Cerca per parola chiave" type="text" name="q" value="{{ search.terms | escape }}" id="searchInputField">
-        </form>
-        <button id="close-searchbar"><img class="search-bar-icons" alt="" src="{{ 'close.svg' | asset_url }}"></button>
 
-
-    </div>
 </header>
-
-
-<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto">
-                {% for link in linklists.main-menu.links %}
-                    {% assign child_list_handle = link.title | handleize %}
-                    {% if linklists[child_list_handle].links != blank %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ link.url }}">{{ link.title }}</a>
-                        </li>
-                        [
-                        {% for childlink in linklists[child_list_handle].links %}
-                            <li class="nav-item">
-                                <a class="nav-link" id="searchInputField" href="{{ childlink.url }}">{{ childlink.title | escape }}
-                                </a>
-                            </li>
-                        {% endfor %}]
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ link.url }}">{{ link.title }}</a>
-                        </li>
-                    {% endif %}
-                {% endfor %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/cart">Carrello
-                        <span class="badge bg-danger rounded-pill" id="numberOfCartItems"></span>
-                    </a>
-                </li>
-            </ul>
-            <ul class="navbar-nav">
-          
-                <li class="nav-item"></li>
-            </ul>
-            <form action="/search" method="GET" role="search">
-                <input type="text" name="q" value="{{ search.terms | escape }}" id="searchInputField">
-            </form>
-        </div>
-    </div>
-</nav>
-
 <div aria-labelledby="offcanvasLabel" class="offcanvas offcanvas-end" id="offcanvasSearchResult" tabindex="-1">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasLabel">Risultati della ricerca</h5>
         <button aria-label="Close" class="btn-close text-reset" data-bs-dismiss="offcanvas" type="button"></button>
     </div>
     <div class="offcanvas-body" id="search_results_body"></div>
-</div> -->
+</div>

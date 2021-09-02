@@ -16,7 +16,6 @@ if (document.getElementById("AddressCountryNew") != null) {
       var provinceSelector = document.getElementById("AddressProvinceNew");
       var provinceArray = JSON.parse(provinces);
 
-      //console.log(provinceArray);
       if (provinceArray.length < 1) {
         provinceSelector.setAttribute("disabled", "disabled");
       } else {
@@ -138,43 +137,51 @@ if (document.getElementById("forgotPassword") != null) {
 //     .catch((err) => console.error(err));
 // }
 
-// const predictiveSearchInput = document.getElementById("searchInputField");
-// let timer;
-// const offcanvasSearch = document.getElementById("offcanvasSearchResult");
-// const bsOffcanvas = new bootstrap.Offcanvas(offcanvasSearch);
-// if (predictiveSearchInput !== null) {
-//   predictiveSearchInput.addEventListener("input", () => {
-//     console.log(predictiveSearchInput.value);
-//     clearTimeout(timer);
-//     if (predictiveSearchInput.value) {
-//       timer = setTimeout(fetchPredictiveSearch, 1000);
-//     }
-//   });
-// }
+const predictiveSearchInput = document.getElementById("searchInputField");
 
-// function fetchPredictiveSearch() {
-//   fetch(
-//     `/search/suggest.json?q=${predictiveSearchInput.value}&resources[type]=product`
-//   )
-//     .then((res) => res.json())
-//     .then((data) => {
-//       console.log(data);
-//       const products = data.resources.results.products;
-//       document.getElementById("search_results_body").innerHTML = "";
-//       products.forEach((product) => {
-//         document.getElementById("search_results_body").innerHTML += `
-//         <div class="card" style="width: 19rem;">
-//             <img src="${product.image} class="card-img-top">
-//             <div class="card-body">
-//                 <h5 class="card-title">${product.title}</h5>
-//                 <p class="card-text">$${product.price}</p>
-//             </div>
-//         </div>
-//     `;
-//       });
-//       bsOffcanvas.show();
-//     });
-// }
+let timer;
+const offcanvasSearch = document.getElementById("offcanvasSearchResult");
+const bsOffcanvas = new bootstrap.Offcanvas(offcanvasSearch);
+if (predictiveSearchInput !== null) {
+  predictiveSearchInput.addEventListener("input", () => {
+    clearTimeout(timer);
+    if (predictiveSearchInput.value) {
+      timer = setTimeout(fetchPredictiveSearch, 1000);
+    }
+  });
+}
+
+function fetchPredictiveSearch() {
+  fetch(
+    `/search/suggest.json?q=${predictiveSearchInput.value}&resources[type]=product`
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      const products = data.resources.results.products;
+      document.getElementById("search_results_body").innerHTML = "";
+
+      if (products.length === 0) {
+        document.getElementById(
+          "search_results_body"
+        ).innerHTML += `<div><h5>Non ci sono prodotti che corrispondono alla ricerca</h5></div>`;
+      } else {
+        products.forEach((product) => {
+          document.getElementById("search_results_body").innerHTML += `
+          <a href="${product.url}">
+        <div class="card" style="width: 19rem;">
+            <img src="${product.image} class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">${product.title}</h5>
+                <p class="card-text">$${product.price}</p>
+            </div>
+        </div>
+        </a>
+    `;
+        });
+      }
+      bsOffcanvas.show();
+    });
+}
 
 const menu_btn = document.querySelector(".menu-btn");
 const navbar = document.querySelector(".nav-bar");
@@ -182,7 +189,6 @@ const navbar = document.querySelector(".nav-bar");
 menu_btn.addEventListener("click", toggleMenu);
 
 function toggleMenu() {
-  console.log("in here");
   navbar.classList.toggle("is-active");
   menu_btn.classList.toggle("open");
 }
@@ -193,8 +199,6 @@ const close_search_bar = document.getElementById("close-searchbar");
 search_icon.addEventListener("click", openSearchBar);
 close_search_bar.addEventListener("click", closeSearchBar);
 function openSearchBar() {
-  console.log("in search");
-  console.log(search_bar);
   search_bar.classList.add("is-active");
 }
 

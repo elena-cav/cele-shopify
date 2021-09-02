@@ -54,7 +54,7 @@ ul {
   position: absolute;
   top: 0;
   left: 0;
-  opacity: 0.3;
+  opacity: 0.2;
   background-color: black;
   width: 100%;
   height: 100%;
@@ -67,7 +67,6 @@ ul {
   bottom: 0;
   width: 100%;
   height: 100%;
-  overflow: cover;
   z-index: -2;
 }
 .hero-subsection {
@@ -143,7 +142,7 @@ ul {
 
   .nav-container {
     position: relative;
-    max-width: 960px;
+    // max-width: 960px;
     padding: 15px;
     margin: 0 auto;
     display: flex;
@@ -208,11 +207,15 @@ ul {
                 display: block;
                 position: absolute;
                 top: 50%;
-                left: 100px;
+                left: 10px;
                 transform: translateY(-50%);
                 color: #005f73;
                 font-size: 18px;
                 font-weight: bold;
+
+                @media screen and (max-width: 767px) {
+                  right: 100px;
+                }
               }
 
               &:hover {
@@ -229,7 +232,7 @@ ul {
               opacity: 0;
               transform: translateY(-200px);
               pointer-events: none;
-              transition: 0.4s ease-out;
+              transition: 0.6s ease-out;
 
               min-width: 100%;
               width: max-content;
@@ -273,7 +276,7 @@ ul {
         opacity: 0;
         pointer-events: none;
 
-        transition: 0.4s ease-out;
+        transition: 0.6s ease-out;
 
         &.is-active {
           opacity: 1;
@@ -366,40 +369,6 @@ ul {
     transform: rotate(-45deg) translate(35px, 35px);
   }
 
-  .search-bar {
-    background-color: #f5f5f5;
-    height: 110px;
-    width: 100%;
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    justify-content: space-evenly;
-    transform: translateY(-200px);
-    transition: all 0.5s ease-in-out;
-    z-index: 999;
-    align-items: center;
-    padding: 0 6rem 0 6rem;
-
-    &.is-active {
-      transform: translateY(0px);
-    }
-    form {
-      display: flex;
-      justify-content: center;
-      width: 90%;
-    }
-    .search-bar-icons {
-      width: 20px;
-      height: 20px;
-    }
-    .search-bar-input {
-      width: 80%;
-      border: none;
-      padding: 5px;
-    }
-  }
-
   .user-icon,
   .bag-icon,
   .search-icon {
@@ -415,16 +384,59 @@ ul {
   }
 
   .search-bar-lg {
-    padding: 5px 5px;
-    display: inline-block;
-    @media screen and (max-width: 767px) {
-      display: none;
-    }
   }
   .search-icon {
     display: none;
     @media screen and (max-width: 767px) {
       display: inline-block;
+    }
+  }
+}
+
+.icons-section {
+  display: flex;
+  padding-top: 10px;
+  column-gap: 5px;
+}
+
+.search-bar {
+  display: inline-block;
+
+  .search-bar-icon {
+    display: none;
+  }
+  @media screen and (max-width: 767px) {
+    background-color: #f5f5f5;
+    height: 110px;
+    width: 100%;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    justify-content: space-evenly;
+    transform: translateY(-200px);
+    transition: all 0.5s ease-in-out;
+    z-index: 999;
+    align-items: center;
+    padding: 0 6rem 0 6rem;
+    &.is-active {
+      transform: translateY(0px);
+    }
+    form {
+      display: flex;
+      justify-content: center;
+      width: 90%;
+    }
+    .search-bar-icon,
+    .close-search-bar-icon {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+    }
+    .search-bar-input {
+      width: 80%;
+      border: none;
+      padding: 5px;
     }
   }
 }
