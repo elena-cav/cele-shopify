@@ -205,3 +205,33 @@ function openSearchBar() {
 function closeSearchBar() {
   search_bar.classList.remove("is-active");
 }
+
+// var waypoint = new Waypoint({
+//   element: document.getElementById('basic-waypoint'),
+//   handler: function() {
+//     notify('Basic waypoint triggered')
+//   }
+// })
+
+$(".image-zoomable")
+  // tile mouse actions
+  .on("mouseover", function () {
+    console.log("here");
+    $(this)
+      .children(".img-product")
+      .css({ transform: "scale(" + $(this).attr("data-scale") + ")" });
+  })
+  .on("mouseout", function () {
+    $(this).children(".img-product").css({ transform: "scale(1)" });
+  })
+  .on("mousemove", function (e) {
+    $(this)
+      .children(".img-product")
+      .css({
+        "transform-origin":
+          ((e.pageX - $(this).offset().left) / $(this).width()) * 100 +
+          "% " +
+          ((e.pageY - $(this).offset().top) / $(this).height()) * 100 +
+          "%",
+      });
+  });

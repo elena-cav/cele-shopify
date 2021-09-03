@@ -27,8 +27,9 @@
         </div>
     </div>
 </footer>
-
+{{ '//ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js' | script_tag }}
 {{ 'bootstrap.min.js' | asset_url | script_tag }}
+{{ 'zepto.waypoints.min.js' | asset_url | script_tag }}
 {{ 'application.js' | asset_url | script_tag }}
 
 {% schema %}

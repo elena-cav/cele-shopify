@@ -1,94 +1,138 @@
-{% assign current_product = product.selected_or_first_available_variant %}
-{%
+{% assign current_product = product.selected_or_first_available_variant %} {%
 assign product_image = current_product.featured_image | default:
 product.featured_image%}
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-6 col-12">
-            <img class="img-fluid" src="{{ product_image | img_url: 'large' }}" alt="{{ product_image.alt }}" id="ProductMainImage"/>
-          
+  <div class="grid-container">
+    <div class="first-images-wrapper">
+      <div class="img-1 image-zoomable" data-scale="1.6">
+        <!-- <img
+          class="img-fluid image-zoomable"
+          id="image-zoomable"
 
+          src="{{ product.media[0] | img_url: 'large' }}"
+          alt="{{ product_image.alt }}"
+          id="ProductMainImage"
+        /> -->
+        <a
+        class="img-product"
+        target="_self"
+        href="{{ product.media[0]}}"
+        style="background: url('{{ product.media[0] | img_url: 'large' }}')"
 
+      ></a>
+      </div>
+      <div class="img-2">
+        <div
+        class="img-product"
+        target="_self"
+        style="background: url('{{ product.media[1] | img_url: 'large' }}')"
 
+      >
+
+      
+      </div>
     </div>
-    <div class="col-md-6 col-12">
-        <h1>{{ product.title }}</h1>
-        <p>{{ current_product.price | money_without_trailing_zeros }}</p>
-        {% form 'product', product, class:"product-form", id:"AddToCartForm" %}
-            <div class="mb-3">
-                <select class="form-select" id="productSelect" name="id">
-                  
-
-                    {% for variant in product.variants %}
-                        {% if variant.available %}
-                            <option value="{{ variant.id }}">{{ variant.title }}</option>
-                        {% else %}
-                            <option disabled="disabled" value="{{ variant.id }}"></option>
-
-                        {% endif %}
-                    {% endfor %}
-                </select>
-                <div class="mb-3">
-                    <input class="form-control" id="quantity" min="1" name="quantity" type="number" value="1"/>
-                </div>
-                <button class="btn rounded-0 btn-secondary btn-lg w-100" id="addToCart" name="add" type="submit">
-                    Aggiungi
-                </button>
-            </div>
-            {% if section.settings.dybamic_button_checkbox %}
-                {{ form | payment_button }}{% endif %}
-            {% endform %}
-        </div>
     </div>
-</div>
-<div class="container">
-    <section class="row content-justify-center my-5" id="product_recommendation">
-        <div class="text-center">
-            <h1>Ti potrebbe anche piacere</h1>
+    <div class="description-block">
+      <h1>{{ product.title }}</h1>
+      <p>{{ current_product.price | money_without_trailing_zeros }}</p>
+    </div>
+    <div class="add-to-cart-block">
+      {% form 'product', product, class:"product-form", id:"AddToCartForm" %}
+      <div class="cart-form mb-3">
+        <select class="form-select" id="productSelect" name="id">
+          {% for variant in product.variants %} {% if variant.available %}
+          <option value="{{ variant.id }}">{{ variant.title }}</option>
+          {% else %}
+          <option disabled="disabled" value="{{ variant.id }}"></option>
+
+          {% endif %} {% endfor %}
+        </select>
+        <div class="mb-3">
+          <input
+            class="form-control"
+            id="quantity"
+            min="1"
+            name="quantity"
+            type="number"
+            value="1"
+          />
         </div>
-        <div id="product_recommendation_body"></div>
+        <button
+          class="btn rounded-0 btn-secondary btn-lg w-100"
+          id="addToCart"
+          name="add"
+          type="submit"
+        >
+          Aggiungi
+        </button>
+      </div>
+      {% if section.settings.dybamic_button_checkbox %}
+      {{ form | payment_button }}{% endif %} {% endform %}
+    </div>
+    <div class="second-images-wrapper">
+      <div class="img-3">
+        <img
+          class="img-fluid"
+          src="{{ product.media[2] | img_url: 'large' }}"
+          alt="{{ product_image.alt }}"
+        />
+      </div>
+      <div class="img-4">
+        <img
+          class="img-fluid"
+          src="{{ product.media[3] | img_url: 'large' }}"
+          alt="{{ product_image.alt }}"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <section
+      class="row content-justify-center my-5"
+      id="product_recommendation"
+    >
+      <div class="text-center">
+        <h1>Ti potrebbe anche piacere</h1>
+      </div>
+      <div id="product_recommendation_body"></div>
     </section>
-</div>
-<script>
-  const productRecommendationBody = document.getElementById(
-    "product_recommendation_body"
-  );
-  fetch('/recommendations/products.json?product_id={{product.id}}&section_id=product-recommendations')
-    .then((res) => res.json())
-    .then(({ products }) => {
-      console.log('PRODUCTS', products)
-      if (products.length > 0) {
-        products.forEach((product) => {
-          let card;
-          card = '<div class="col-3 g-2">';
-          card += '<div class="card" style="width: 18rem;">';
+  </div>
+  <script>
+    const productRecommendationBody = document.getElementById(
+      "product_recommendation_body"
+    );
+    fetch(
+      "/recommendations/products.json?product_id={{product.id}}&section_id=product-recommendations"
+    )
+      .then((res) => res.json())
+      .then(({ products }) => {
+        console.log("PRODUCTS", products);
+        if (products.length > 0) {
+          products.forEach((product) => {
+            let card;
+            card = '<div class="col-3 g-2">';
+            card += '<div class="card" style="width: 18rem;">';
 
-          if (product.images.length > 0) {
+            if (product.images.length > 0) {
+              card +=
+                '<img class="card-img-top" src="' + product.images[0] + '">';
+            }
+            card += '<div class="card-body">';
             card +=
-              '<img class="card-img-top" src="' + product.images[0] + '">';
-          }
-          card += '<div class="card-body">';
-          card +=
-            '<h3><a href="' + product.url + '">' + product.title + "</a></h3>";
-          card += "</div></div></div>";
-          productRecommendationBody.innerHTML += card;
-        });
-      }
-    });
-</script>
-{% schema %}
-
-{
-    "name": "Product pages",
-    "settings": [
-        {
-            "type": "checkbox",
-            "id": "dynamic_buttons_checkbox",
-            "label": "Abilita il bottone dinamico",
-            "default": false
+              '<h3><a href="' +
+              product.url +
+              '">' +
+              product.title +
+              "</a></h3>";
+            card += "</div></div></div>";
+            productRecommendationBody.innerHTML += card;
+          });
         }
-    ]
-}
-
-{% endschema %}
+      });
+  </script>
+  {% schema %} { "name": "Product pages", "settings": [ { "type": "checkbox",
+  "id": "dynamic_buttons_checkbox", "label": "Abilita il bottone dinamico",
+  "default": false } ] } {% endschema %}
+</div>
