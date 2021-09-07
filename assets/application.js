@@ -235,3 +235,43 @@ $(".image-zoomable")
           "%",
       });
   });
+
+// var myModal = new bootstrap.Modal(
+//   document.getElementById("exampleModalCenter"),
+//   options
+// );
+
+const productInfoAnchor = document.getElementById("testbutton");
+let productModal;
+if (document.getElementById("exampleModal") != null) {
+  productModal = new bootstrap.Modal(
+    document.getElementById("exampleModal"),
+    {}
+  );
+  console.log("productModal", productModal);
+  productModal.show();
+}
+
+$(document).ready(function () {
+  $(".img-product").click(function () {
+    $("#carouselModal").modal("show");
+  });
+});
+
+$(document).ready(function () {
+  $(".close-modal").click(function () {
+    $("#carouselModal").modal("hide");
+  });
+});
+
+function myFunction(index) {
+  console.log(index);
+  document.getElementById(`dropdownMenu-${index}`).classList.toggle("show");
+}
+
+var dropdownElementList = [].slice.call(
+  document.querySelectorAll(".dropdown-toggle")
+);
+var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+  return new bootstrap.Dropdown(dropdownToggleEl);
+});

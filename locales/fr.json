@@ -1,0 +1,20 @@
+{
+  "general": {
+    "404": {
+      "title": "Non trovato",
+      "subtext_html": "La pagina che stai cercando non esiste"
+    },
+    "Cart": {
+      "title": "Carrello"
+    },
+    "Blog": {
+      "title": "Blog"
+    },
+    "Layout": {
+      "login_text": "Login",
+      "logout_text": "Logout",
+      "register_text": "Registrati",
+      "account_text": "User"
+    }
+  }
+}
