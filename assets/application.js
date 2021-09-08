@@ -37,6 +37,22 @@ if (document.getElementById("AddressCountryNew") != null) {
     });
 }
 
+if (document.getElementById("filter-btn") != null) {
+  document.getElementById("filter-btn").addEventListener("click", function (e) {
+    const filters = document.querySelector(".filters-container");
+    filters.classList.add("show");
+  });
+}
+
+if (document.getElementById("close-filters-icon") != null) {
+  document
+    .getElementById("close-filters-icon")
+    .addEventListener("click", function (e) {
+      const filters = document.querySelector(".filters-container");
+      filters.classList.remove("show");
+    });
+}
+
 if (document.getElementById("forgotPassword") != null) {
   document
     .getElementById("forgotPassword")
@@ -146,7 +162,7 @@ if (predictiveSearchInput !== null) {
   predictiveSearchInput.addEventListener("input", () => {
     clearTimeout(timer);
     if (predictiveSearchInput.value) {
-      timer = setTimeout(fetchPredictiveSearch, 1000);
+      timer = setTimeout(fetchPredictiveSearch, 800);
     }
   });
 }
@@ -168,11 +184,13 @@ function fetchPredictiveSearch() {
         products.forEach((product) => {
           document.getElementById("search_results_body").innerHTML += `
           <a href="${product.url}">
-        <div class="card" style="width: 19rem;">
+        <div class="search-suggestions card" style="width: 19rem;">
             <img src="${product.image} class="card-img-top">
             <div class="card-body">
-                <h5 class="card-title">${product.title}</h5>
-                <p class="card-text">$${product.price}</p>
+                <p class="card-title">${product.title}</p>
+                <p class="card-text">${product.vendor}</p>
+
+                <p class="card-text">€${product.price}</p>
             </div>
         </div>
         </a>
@@ -262,16 +280,4 @@ $(document).ready(function () {
   $(".close-modal").click(function () {
     $("#carouselModal").modal("hide");
   });
-});
-
-function myFunction(index) {
-  console.log(index);
-  document.getElementById(`dropdownMenu-${index}`).classList.toggle("show");
-}
-
-var dropdownElementList = [].slice.call(
-  document.querySelectorAll(".dropdown-toggle")
-);
-var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
-  return new bootstrap.Dropdown(dropdownToggleEl);
 });

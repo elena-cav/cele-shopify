@@ -4,6 +4,7 @@
   "description": "��#\u0000 \u0000c\u0000e\u0000l\u0000e\u0000-\u0000s\u0000h\u0000o\u0000p\u0000i\u0000f\u0000y\u0000\r\u0000 \u0000",
   "main": "gulpfile.js",
   "dependencies": {
+    "bootstrap": "^5.1.1",
     "gulp": "^4.0.2",
     "gulp-sass": "^5.0.0",
     "jquery": "^3.6.0",

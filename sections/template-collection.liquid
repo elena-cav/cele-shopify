@@ -1,106 +1,89 @@
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    </head>
+<div class="container products-page">
+    {% paginate collection.products by 20 %}
+        <div class="row mb-4">
 
-<div class="container">
-    {% paginate collection.products by 5 %}
-        <div class="row my-5">
-            <script>console.log('collection', {{collection}})</script>
+            <h1 class="text-center ">{{ collection.title }}</h1>
 
-            <h1 class="text-center text-uppercase">{{ collection.title }}</h1>
+
         </div>
 
-        <div class="row justify-content-center">
+        <div class="button-container">
+            <button class=" btn btn-light" id="filter-btn" type="button">
+                Filtra e Ordina
+                <img class="control-icon" alt="" src="{{ 'sound-control.svg' | asset_url }}">
+            </button>
+        </div>
+        <div class="filters-container">
+            <button id="close-filters-icon" type="button">
+                <img class="close-icon" alt="" src="{{ 'close.svg' | asset_url }}">
+            </button>
 
-            <select class="sort-form form-select form-select-sm w-25 rounded-0" id="sort_by" name="sorting">
+
+            <select class="text-uppercase sort-form form-select form-select-sm rounded-0 border-0 font-weight-bold" id="sort_by" name="sorting">
                 {% for option in collection.sort_options %}
                     <option value="{{ option.value }}" {% if option.value == collection.sort_by %} selected {% endif %}>{{ option.name }}</option>
                 {% endfor %}
             </select>
-            
 
 
-
-        </div>
-
-
-        <form class="filter-form">
             {%- for filter in collection.filters -%}
-            <div class="dropdown">
-
-                <button data-bs-toggle="dropdown" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton-{{forloop.index}}"  aria-expanded="false">
-                  {{filter.label}}
-                </button>
-                <ul class="dropdown-menu checkbox-menu allow-focus" id="dropdownMenu-{{forloop.index}}" aria-labelledby="dropdownMenuButton-{{forloop.index}}">
-                    {%- for filter_value in filter.values -%}
-
-                    <li >
-                        <input type="checkbox"
-                        name="{{ filter_value.param_name }}"
-                        value="{{ filter_value.value }}"
-                        id="Filter-{{ filter.label }}-{{ forloop.index }}"
-                        {% if filter_value.active -%}checked{%- endif %}
-                        {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}
-                      >
-                      <label for="Filter-{{ filter.label }}-{{ forloop.index }}">{{filter_value.value}}</label>
-                      </li>
-                      {%- endfor -%}
-
-                    
-
-                      <div class="filter-group-display__submit">
-                        <input type="submit" value="Applica">
-                      </div>
-
-                </ul>
-               
-                  {%- endfor -%}
-
-              </div>
-              
 
 
+                <form>
+                    <div class="dropdown rounded-0">
+
+                        <button aria-expanded="false" class="text-uppercase btn btn-secondary dropdown-toggle dropdown-btn font-weight-bold " data-bs-toggle="dropdown" id="dropdownMenuButton-{{forloop.index}}" type="button">
+                            {{filter.label}}
+                        </button>
+                        <ul aria-labelledby="dropdownMenuButton-{{forloop.index}}" class="dropdown-menu checkbox-menu" id="dropdownMenu-{{forloop.index}}">
+                            {%- for filter_value in filter.values -%}
+                                {% if filter.label != "Cele Boutique Alghero" %}
+                                    <li>
+                                        <input type="checkbox" name="{{ filter_value.param_name }}" value="{{ filter_value.value }}" id="Filter-{{ filter.label }}-{{ forloop.index }}" {% if filter_value.active -%} checked {%- endif %} {% if filter_value.count == 0 and filter_value.active == false -%} disabled {%- endif %}>
+                                        <label class=" dd-label" for="Filter-{{ filter.label }}-{{ forloop.index }}">{{filter_value.value}}</label>
+                                    </li>
+                                {% endif %}
+                            {%- endfor -%}
 
 
+                            <div class="filter-group-display__submit">
+                                <input class="applybtn " type="submit" value="Applica">
+                            </div>
+
+                        </ul>
+                    </div>
+                </form>
+            {%- endfor -%}
 
 
-
-
-
-
-
-
-
-
-
-          
-            <div class="active-filters">
-              <a href="{{ collection.url }}" class="active-filters__clear">Cancella</a>
-          
-              {%- for filter in collection.filters -%}
-                {% if filter.type == "price_range"  %}
-                  {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
-                    <a class="active-filters__remove-filter" href="{{ filter.url_to_remove }}">
-                      {%- assign min_value = filter.min_value.value | default: 0 -%}
-                      {%- assign max_value = filter.max_value.value | default: filter.range_max -%}
-          
-                      {{ min_value | money }} - {{ max_value | money }} X
-                    </a>
-                  {%- else -%}
-                    {%- for filter_value in filter.active_values -%}
-                      <a class="active-filters__remove-filter" href="{{ filter_value.url_to_remove }}">
-                        {{ filter_value.label }} X
-                      </a>
-                    {%- endfor -%}
-                  {%- endif -%}
-                {% endif %}
-              {%- endfor -%}
+            <div class="delete-filters">
+                <a href="{{ collection.url }}" class=" active-filters__clear">Cancella i filtri</a>
             </div>
-          </form>
         </div>
 
+        <div class="active-filters">
 
+            {% for filter in collection.filters %}
+                {% if filter.active_values.size != 0 %}
+                    <p>Filtri attivi:</p>
+                {% endif %}
 
+            {% endfor %}
+            {%- for filter in collection.filters -%}
+                {% for value in filter.values %}
+                    {% if value.active %}
+                        <p>{{filter.label}},
+                            {{value.label}}</p>
+                        <div class="delete-filters">
+                            <a href="{{ collection.url }}" class="active-filters__clear">
+                                <img class="close-icon" alt="" src="{{ 'close.svg' | asset_url }}">
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {%- endfor -%}
+
+        </div>
 
 
         <div class="product-list-container">
@@ -130,8 +113,8 @@
                             {% endif %}
                             <a href={{product.url}}>
                                 <div class="mt-2 product-detail-container">
-                                    <p class="text-uppercase">{{product.vendor}}</p>
-                                    <p class="text-uppercase">{{ product.title }}</p>
+                                    <p class="">{{product.vendor}}</p>
+                                    <p class="">{{ product.title }}</p>
                                     <p class="price">{{ product.price | money_without_trailing_zeros }}</p>
                                 </div>
                             </a>
@@ -152,33 +135,3 @@
 
     {% endpaginate %}
 </div>
-
-
-<!-- <div aria-hidden="true" class="modal fade" id="productInfoModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-12 col-md-6">
-                        <img alt="" class="img-fluid" id="productInfoImg" src="">
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <h1 id="productInfoTitle"></h1>
-                        <h3 id="productInfoPrice"></h3>
-                        <p id="productInfoDescription"></p>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <form action="#" class="row" id="addToCartForm">
-                    <select class="form-select col-auto" id="modalItemID" name="id"></select>
-                    <input class="col-auto" id="modalItemQuantity" min="1" name="quantity" type="number" value="1">
-                    <button class="btn btn-success col-auto" type="submit">Add to cart</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> -->
