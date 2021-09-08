@@ -37,7 +37,7 @@
                         </button>
                         <ul aria-labelledby="dropdownMenuButton-{{forloop.index}}" class="dropdown-menu checkbox-menu" id="dropdownMenu-{{forloop.index}}">
                             {%- for filter_value in filter.values -%}
-                                {% if filter.label != "Cele Boutique Alghero" %}
+                                {% if filter_value.value != "Cele Boutique Alghero" %}
                                     <li>
                                         <input type="checkbox" name="{{ filter_value.param_name }}" value="{{ filter_value.value }}" id="Filter-{{ filter.label }}-{{ forloop.index }}" {% if filter_value.active -%} checked {%- endif %} {% if filter_value.count == 0 and filter_value.active == false -%} disabled {%- endif %}>
                                         <label class=" dd-label" for="Filter-{{ filter.label }}-{{ forloop.index }}">{{filter_value.value}}</label>
