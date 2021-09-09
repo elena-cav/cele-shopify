@@ -3,6 +3,7 @@
         <div class="brand">
             <a class="nav-link" href="/">
                 <h2>Cele</h2>
+
             </a>
         </div>
 
@@ -92,11 +93,12 @@
                 {% endif %}
             {% endif %}
             <button class="bag-icon">
-                <a href="/cart"><img alt="" src="{{ 'bag.svg' | asset_url }}"></a>
+                <a href="/cart"><img alt="" src="{{ 'bag.svg' | asset_url }}">
+                    <span class="cart-badge" id="numberOfCartItems">{{cart.item_count}}</span>
+                </a>
             </button>
         </div>
     </div>
-
 </header>
 <div aria-labelledby="offcanvasLabel" class="offcanvas offcanvas-end" id="offcanvasSearchResult" tabindex="-1">
     <div class="offcanvas-header">

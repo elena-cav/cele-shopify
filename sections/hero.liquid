@@ -1,10 +1,10 @@
-<section class="inner-hero-section mb-2">
+<section class="inner-hero-section">
     <div class="overlay"></div>
     {% for block in section.blocks %}
         {% if block.type == 'main' %}
 
             {% if block.settings.image != blank %}
-                <img class="hero-image" src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.image.alt}}">
+                <img c lass="hero-image" src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.image.alt}}">
             {% else %}
                 {% assign placeholder = 'lifestyle-2' %}
                 {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}
@@ -21,11 +21,11 @@
                 </div>
             </div>
         </section>
-        <div class="row m-0 g-4">
+        <div class="hero-subsection-block">
 
         {% elsif block.type == 'left' %}
-            <div class="hero-subsection col-xs-12 col-sm-6 p-0">
-                <div class="mr-1 overlay"></div>
+            <div class="hero-subsection">
+                <div class="overlay"></div>
 
                 {% if block.settings.image != blank %}
                     <img class="hero-image pr-1" src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.image.alt}}">
@@ -45,8 +45,8 @@
             </div>
 
         {% elsif block.type == 'right' %}
-            <div class="hero-subsection col-xs-12 col-sm-6 p-0">
-                <div class="ml-1 overlay"></div>
+            <div class="hero-subsection">
+                <div class="overlay"></div>
 
                 {% if block.settings.image != blank %}
                     <img class="pl-1 hero-image" src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.image.alt}}">

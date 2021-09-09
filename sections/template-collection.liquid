@@ -1,12 +1,8 @@
 <div class="container products-page">
     {% paginate collection.products by 20 %}
         <div class="row mb-4">
-
             <h1 class="text-center ">{{ collection.title }}</h1>
-
-
         </div>
-
         <div class="button-container">
             <button class=" btn btn-light" id="filter-btn" type="button">
                 Filtra e Ordina
@@ -17,21 +13,14 @@
             <button id="close-filters-icon" type="button">
                 <img class="close-icon" alt="" src="{{ 'close.svg' | asset_url }}">
             </button>
-
-
             <select class="text-uppercase sort-form form-select form-select-sm rounded-0 border-0 font-weight-bold" id="sort_by" name="sorting">
                 {% for option in collection.sort_options %}
                     <option value="{{ option.value }}" {% if option.value == collection.sort_by %} selected {% endif %}>{{ option.name }}</option>
                 {% endfor %}
             </select>
-
-
             {%- for filter in collection.filters -%}
-
-
                 <form>
                     <div class="dropdown rounded-0">
-
                         <button aria-expanded="false" class="text-uppercase btn btn-secondary dropdown-toggle dropdown-btn font-weight-bold " data-bs-toggle="dropdown" id="dropdownMenuButton-{{forloop.index}}" type="button">
                             {{filter.label}}
                         </button>
@@ -44,30 +33,22 @@
                                     </li>
                                 {% endif %}
                             {%- endfor -%}
-
-
                             <div class="filter-group-display__submit">
                                 <input class="applybtn " type="submit" value="Applica">
                             </div>
-
                         </ul>
                     </div>
                 </form>
             {%- endfor -%}
-
-
             <div class="delete-filters">
                 <a href="{{ collection.url }}" class=" active-filters__clear">Cancella i filtri</a>
             </div>
         </div>
-
         <div class="active-filters">
-
             {% for filter in collection.filters %}
                 {% if filter.active_values.size != 0 %}
                     <p>Filtri attivi:</p>
                 {% endif %}
-
             {% endfor %}
             {%- for filter in collection.filters -%}
                 {% for value in filter.values %}
@@ -82,12 +63,8 @@
                     {% endif %}
                 {% endfor %}
             {%- endfor -%}
-
         </div>
-
-
         <div class="product-list-container">
-
             {% for product in collection.products %}
                 {% if product.vendor != "Cele Boutique Alghero" %}
                     {% assign image = product.featured_media.preview_image %}
@@ -100,16 +77,12 @@
                                         <img class="product-list-image" src="{{ image | img_url: 'medium' }}" alt="{{ product.title }}">
                                     </a>
                                 </div>
-
                             {% else %}
                                 <div class="img-container">
-
                                     <a href="#" id="productInfoAnchor" product-handle="{{ product.handle }}" product-price="{{ product.price | money_without_trailing_zeros }}">
                                         {{ 'product-1' | placeholder_svg_tag: 'card-img-top' }}
                                     </a>
                                 </div>
-
-
                             {% endif %}
                             <a href={{product.url}}>
                                 <div class="mt-2 product-detail-container">
@@ -118,20 +91,13 @@
                                     <p class="price">{{ product.price | money_without_trailing_zeros }}</p>
                                 </div>
                             </a>
-
-
                         </a>
                     </div>
                 {% endif %}
-
-
             {% else %}
                 <p>Nessun risultato</p>
             {% endfor %}
         </div>
-
-
         {% render 'pagination', paginate: paginate %}
-
     {% endpaginate %}
 </div>

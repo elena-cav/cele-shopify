@@ -142,16 +142,20 @@ if (document.getElementById("forgotPassword") != null) {
 // document.addEventListener("DOMContentLoaded", () => {
 //   updateCart();
 // });
-// function updateCart() {
-//   fetch("/cart.js")
-//     .then((resp) => resp.json())
-//     .then(
-//       (data) =>
-//         (document.getElementById("numberOfCartItems").innerHTML =
-//           data.items.length)
-//     )
-//     .catch((err) => console.error(err));
-// }
+function updateCart() {
+  fetch("/cart")
+    .then((resp) => resp.json())
+    .then((data) => {
+      console.log(
+        "DATA",
+        data
+      )(
+        (document.getElementById("numberOfCartItems").innerHTML =
+          data.items.length)
+      );
+    })
+    .catch((err) => console.error(err));
+}
 
 const predictiveSearchInput = document.getElementById("searchInputField");
 
