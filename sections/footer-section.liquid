@@ -1,7 +1,7 @@
 <!-- For demo purpose -->
 
 <!-- End -->
-
+<script>console.log({{routes}})</script>
 <!-- Footer -->
 <footer class="bg-white">
   <div class="row">
@@ -19,7 +19,7 @@
               />
             </svg>
             <span class="sib-form-message-panel__inner-text">
-              La tua iscrizione non e&#039; andata a buon fine. Prova di nuovo.
+              La tua iscrizione non è andata a buon fine. Prova di nuovo.
             </span>
           </div>
         </div>
@@ -40,7 +40,7 @@
               />
             </svg>
             <span class="sib-form-message-panel__inner-text">
-              La tua iscrizione alla Newsletter di Cele Alghero e&#039; andata a
+              La tua iscrizione alla Newsletter di Cele Alghero è andata a
               buon fine.
             </span>
           </div>
@@ -63,7 +63,7 @@
                     <div class="entry__field">
                       <input
                         class="input rounded-0"
-                        type="text"
+                        type="email"
                         id="EMAIL"
                         name="EMAIL"
                         autocomplete="off"
@@ -168,28 +168,32 @@
       </div>
     </div>
   </div>
-  <div class="container footer-links py-5">
+  <div class="footer-links p-5">
     <div class="row py-4">
-      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0 footer-section">
         <h6 class="text-uppercase font-weight-bold mb-4">Assistenza clienti</h6>
         <ul class="list-unstyled mb-0">
-          <li class="mb-2"><a href="#" class="text-muted">Aiuto</a></li>
+          <li class="mb-2"><a href="/pages/contact" class="text-muted">Contatti</a></li>
           <li class="mb-2">
-            <a href="#" class="text-muted">FAQ - Domande frequenti</a>
+            <a href="/pages/faqs" class="text-muted">FAQ - Domande frequenti</a>
           </li>
+          <li class="mb-2">
+            <a  href="tel:+39079974461" class="text-muted">Chiamaci: 079974461</a>
+          </li>
+
           <li class="list-inline-item">
-            <a href="#" target="_blank" title="facebook"
+            <a href="https://www.facebook.com/celeabbigliamentoalghero" target="_blank" title="facebook"
               ><img alt="" src="{{ 'facebook-brands.svg' | asset_url }}"
             /></a>
           </li>
           <li class="list-inline-item">
-            <a href="#" target="_blank" title="instagram"
+            <a href="https://www.instagram.com/cele.alghero/" target="_blank" title="instagram"
               ><img alt="" src="{{ 'instagram-brands.svg' | asset_url }}"
             /></a>
           </li>
         </ul>
       </div>
-      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0 footer-section">
         <h6 class="text-uppercase font-weight-bold mb-4">Cele Boutique</h6>
         <ul class="list-unstyled mb-0">
           <li class="mb-2">
@@ -200,7 +204,7 @@
           <li class="mb-2"><a href="#" class="text-muted">Cookies</a></li>
         </ul>
       </div>
-      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0 footer-section">
         <h6 class="text-uppercase font-weight-bold mb-4">Shopping online</h6>
         <ul class="list-unstyled mb-0">
           <li class="mb-2">
@@ -219,14 +223,14 @@
   </div>
 
   <!-- Copyrights -->
-  <div class="bg-light py-4">
+  <div class="py-4">
     <div class="container text-center">
       <p class="text-muted mb-0 py-2">
         Cele Boutique ©
         <script>
           document.write(new Date().getFullYear());
         </script>
-        - - All Rights Reserved
+        - All Rights Reserved
       </p>
       <p class="text-muted mb-0 py-2">P.IVA</p>
     </div>

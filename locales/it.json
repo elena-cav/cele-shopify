@@ -177,7 +177,7 @@
     },
     "404": {
       "title": "Pagina non trovata",
-      "subtext": "404"
+      "subtext": "La pagina che stai cercando è inesistente"
     }
   },
   "sections": {

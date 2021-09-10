@@ -1,14 +1,14 @@
 <div class="container py-5">
     <div class="row">
         <div class="col-12">
-            <h1>{{ page.title }}</h1>
+            <h1 class="text-center">{{ page.title }}</h1>
         </div>
     </div>
 
     <div class="row">
         {% form 'contact' %}
             {% if form.posted_successfully? %}
-                <div class="alert alert-success">
+                <div class="rounded-0 mt-2 alert alert-success">
                     Grazie per averci contattati
                 </div>
             {% endif %}
@@ -18,31 +18,31 @@
             <div class="row">
                 <div class="col-12 col-md-6">
                     <label for="ContactFormName">Nome</label>
-                    <input class="form-control" id="ContactFormName" name="contact[name]" type="text">
+                    <input class="form-control rounded-0" id="ContactFormName" name="contact[name]" type="text">
                 </div>
                 <div class="col-12 col-md-6">
                     <label for="ContactFormEmail">Email</label>
-                    <input class="form-control" id="ContactFormEmail" name="contact[email]" type="email">
+                    <input class="form-control rounded-0" id="ContactFormEmail" name="contact[email]" type="email">
                 </div>
             </div>
 
             <div class="col-12">
                 <label for="ContactOrderNumber">Numero dell'ordine #</label>
-                <input class="form-control" id="ContactFormOrderNumber" name="contact[order_number]" type="text">
+                <input class="form-control rounded-0" id="ContactFormOrderNumber" name="contact[order_number]" type="text">
             </div>
 
             <div class="col-12">
                 <label for="ContactFormPhone">Numero di telefono</label>
-                <input class="form-control" id="ContactFormPhone" name="contact[phone]" type="tel">
+                <input class="form-control rounded-0" id="ContactFormPhone" name="contact[phone]" type="tel">
             </div>
 
             <div class="col-12">
                 <label for="ContactFormMessage">Messaggio</label>
-                <textarea class="form-control" id="ContactFormMessage" name="contact[body]" rows="10"></textarea>
+                <textarea class="form-control rounded-0" id="ContactFormMessage" name="contact[body]" rows="10"></textarea>
             </div>
 
 
-            <input class="btn btn-success w-100 mt-2" type="submit" value="send">
+            <input class="btn btn-success w-100 mt-2 rounded-0" type="submit" value="Invia">
         {% endform %}
     </div>
 </div> 
