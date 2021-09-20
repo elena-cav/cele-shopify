@@ -1,32 +1,28 @@
-<div class="container py-5 my-5">
+<div class="container my-5">
     <div class="login-form">
-        {% form 'customer_login' %}
-            {% include 'form-error', form: form %}
-            <h1 class="h3">Login cliente</h1>
-            <label for="emailAddress">Indirizzo Email</label>
-            <input class="form-control rounded-0 my-2" name="customer[email]" type="email">
-            <label for="password">Password</label>
-            <input class="form-control rounded-0 my-2" name="customer[password]" type="password">
-
-            <input class="font-weight-bold btn btn-light text-black btn-lg w-100 rounded-0" type="submit" value="Sign in">
-        {% endform %}
-
-        <a class="text-center" href="#recover" id="forgotPassword">Hai dimenticato la password?</a>
-        <button class="font-weight-bold btn btn-light text-black btn-lg w-100 rounded-0">
-            <a class="nav-link" href="{{ routes.account_register_url }}">Registrati</a>
-        </button>
+        {% form 'customer_login' %} {% include 'form-error', form: form %}
+        <h1 class="h3 text-center text-dark">Login cliente</h1>
+        <label for="emailAddress">Indirizzo Email</label>
+        <input class="form-control rounded-0 my-2" name="customer[email]" type="email">
+        <label for="password">Password</label>
+        <input class="form-control rounded-0 my-2" name="customer[password]" type="password">
+        <div class="forgot-pw">
+            <a class="text-center" href="#recover" id="forgotPassword">Hai dimenticato la password?</a>
+        </div>
+        <input class="my-3 font-weight-bold btn btn-dark text-uppercase text-light btn-md w-100 rounded-0" type="submit" value="Accedi"> {% endform %}
+        <div class="text-center">Sei un nuovo cliente?
+            <a class="text-decoration-underline" href="{{ routes.account_register_url }}">Registrati</a>
+        </div>
 
     </div>
     <div class="forgot-password-form d-none" id="forgot_password_form">
-        {% form 'recover_customer_password' %}
-            {% include 'form-error', form: form %}
+        {% form 'recover_customer_password' %} {% include 'form-error', form: form %}
 
-            <div class="col-12">
-                <label class="form-label" for="resetPassword">Indirizzo Email</label>
-                <input class="form-control" id="resetPassword" name="email" type="email">
-            </div>
+        <div class="col-12 text-center">
+            <label class="text-dark form-label mt-4" for="resetPassword">Indirizzo Email</label>
+            <input class="rounded-0 form-control" id="resetPassword" name="email" type="email">
+        </div>
 
-            <input class="btn btn-secondary" type="submit" value="Reset Password">
-        {% endform %}
+        <input class="btn btn-dark btn-sm w-100 my-3 rounded-0" type="submit" value="Reimposta la password"> {% endform %}
     </div>
 </div>

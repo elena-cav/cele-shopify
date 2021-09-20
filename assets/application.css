@@ -1,7 +1,11 @@
 body {
-  font-family: "Nunito", sans-serif;
+  font-family: "Karla", sans-serif;
   padding-top: 110px;
   background-color: #faf9f8;
+}
+
+.form-group.is-invalid .invalid-feedback {
+  display: block;
 }
 
 img {
@@ -21,7 +25,7 @@ h4,
 h5,
 h6,
 p {
-  font-family: "Nunito", sans-serif;
+  font-family: "Karla", sans-serif;
   margin: 0;
 }
 
@@ -60,26 +64,28 @@ ul {
   border-color: #464646;
 }
 
-.inner-hero-section {
+.hero-page h1,
+.hero-page h2 {
+  letter-spacing: 0.2rem;
+}
+.hero-page .inner-hero-section {
   position: relative;
   overflow: hidden;
   width: 100%;
   height: 400px;
   margin-bottom: 1rem;
 }
-
-.hero-btn {
+.hero-page .hero-btn {
   color: white;
   background-color: rgba(0, 0, 0, 0.3);
   font-weight: 600;
   letter-spacing: 0.3rem;
   transition: 0.4s ease-in-out;
 }
-.hero-btn:hover {
+.hero-page .hero-btn:hover {
   background-color: rgba(0, 0, 0, 0.6);
 }
-
-.overlay {
+.hero-page .overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -89,9 +95,8 @@ ul {
   height: 100%;
   z-index: -1;
 }
-
-.inner-hero-section img,
-.inner-hero-section svg {
+.hero-page .inner-hero-section img,
+.hero-page .inner-hero-section svg {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -99,31 +104,30 @@ ul {
   height: 100%;
   z-index: -2;
 }
-
-.hero-subsection-block {
+.hero-page .hero-subsection-block {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 @media screen and (min-width: 767px) {
-  .hero-subsection-block {
+  .hero-page .hero-subsection-block {
     flex-direction: row;
     width: 100%;
   }
 }
-.hero-subsection-block .hero-subsection {
+.hero-page .hero-subsection-block .hero-subsection {
   position: relative;
   overflow: hidden;
   height: 500px;
   width: 100%;
 }
 @media screen and (min-width: 767px) {
-  .hero-subsection-block .hero-subsection {
+  .hero-page .hero-subsection-block .hero-subsection {
     width: 50%;
   }
 }
-.hero-subsection-block .hero-subsection img,
-.hero-subsection-block .hero-subsection svg {
+.hero-page .hero-subsection-block .hero-subsection img,
+.hero-page .hero-subsection-block .hero-subsection svg {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -133,11 +137,49 @@ ul {
   z-index: -2;
 }
 
+.shopify-challenge__container {
+  margin: 0 auto 1rem auto;
+}
+.shopify-challenge__container .shopify-challenge__button {
+  width: 50%;
+  background-color: black;
+  color: white;
+  border-radius: 0;
+  margin: 0 auto 1rem auto;
+}
+
 .login-form,
 .forgot-password-form {
   width: 100%;
   max-width: 330px;
   margin: auto;
+}
+.login-form .forgot-pw,
+.forgot-password-form .forgot-pw {
+  justify-content: flex-end;
+  display: flex;
+  font-size: 0.8rem;
+}
+.login-form .forgot-pw a,
+.forgot-password-form .forgot-pw a {
+  transition: all 0.3s ease-in-out;
+}
+.login-form .forgot-pw a:hover,
+.forgot-password-form .forgot-pw a:hover {
+  color: black;
+}
+.login-form .text-center,
+.forgot-password-form .text-center {
+  color: #9c9798;
+}
+.login-form .text-center a,
+.forgot-password-form .text-center a {
+  color: #9c9798;
+  transition: all 0.3s ease-in-out;
+}
+.login-form .text-center a:hover,
+.forgot-password-form .text-center a:hover {
+  color: black;
 }
 
 .product-list-container {
@@ -283,6 +325,11 @@ ul {
   width: max-content;
   background-color: #f5f5f5;
   list-style-type: none;
+}
+@media screen and (max-width: 820px) {
+  .nav-header .nav-container .nav-bar .nav-menu .menu-item.has-sub-menu .sub-menu {
+    position: relative;
+  }
 }
 .nav-header .nav-container .nav-bar .nav-menu .menu-item.has-sub-menu .sub-menu .menu-item {
   width: 100%;
@@ -634,6 +681,7 @@ ul {
   z-index: 999;
   transform: translateX(80rem);
   transition: 1s ease-in-out;
+  padding-left: 2rem;
 }
 .products-page .filters-container.show {
   transform: translateX(0rem);
@@ -698,8 +746,8 @@ ul {
 .products-page .filters-container #close-filters-icon {
   width: 2rem;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 15px;
+  right: 15px;
 }
 @media screen and (min-width: 990px) {
   .products-page .filters-container #close-filters-icon {
@@ -714,6 +762,10 @@ ul {
   width: 18rem;
   padding-left: 12px;
   color: black;
+}
+.products-page .filters-container .sort-form option {
+  font-size: 0.7rem;
+  font-weight: 700;
 }
 .products-page .filters-container .dropdown .dd-label {
   font-size: 0.7rem;
@@ -867,7 +919,7 @@ footer img {
   filter: invert(60%);
 }
 footer .sib-form {
-  font-family: "Nunito", sans-serif;
+  font-family: "Karla", sans-serif;
   text-align: center;
   background-color: white;
 }
@@ -951,4 +1003,24 @@ footer .form-control::placeholder {
 }
 footer .form-control.shadow-0:focus {
   box-shadow: none;
+}
+
+.page-template img {
+  max-height: 15rem;
+  width: 100%;
+}
+.page-template .subtitle {
+  font-weight: 700;
+}
+
+.account p {
+  color: #9c9798;
+  font-size: 0.8rem;
+}
+.account p a {
+  color: #9c9798;
+  transition: all 0.4s ease-in-out;
+}
+.account p a:hover {
+  color: black;
 }

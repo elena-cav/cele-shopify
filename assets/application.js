@@ -1,68 +1,100 @@
 // Put your application javascript here
 if (document.getElementById("sort_by") !== null) {
-  document.querySelector("#sort_by").addEventListener("change", function (e) {
-    const url = new URL(window.location.href);
-    url.searchParams.set("sort_by", e.currentTarget.value);
-    window.location = url.href;
-  });
+    document.querySelector("#sort_by").addEventListener("change", function(e) {
+        const url = new URL(window.location.href);
+        url.searchParams.set("sort_by", e.currentTarget.value);
+        window.location = url.href;
+    });
 }
 
 if (document.getElementById("AddressCountryNew") != null) {
-  document
-    .getElementById("AddressCountryNew")
-    .addEventListener("change", function (e) {
-      var provinces =
-        this.options[this.selectedIndex].getAttribute("data-provinces");
-      var provinceSelector = document.getElementById("AddressProvinceNew");
-      var provinceArray = JSON.parse(provinces);
+    document
+        .getElementById("AddressCountryNew")
+        .addEventListener("change", function(e) {
+            console.log("in here");
+            var provinces =
+                this.options[this.selectedIndex].getAttribute("data-provinces");
+            var provinceSelector = document.getElementById("AddressProvinceNew");
+            var provinceArray = JSON.parse(provinces);
 
-      if (provinceArray.length < 1) {
-        provinceSelector.setAttribute("disabled", "disabled");
-      } else {
-        provinceSelector.removeAttribute("disabled");
-      }
+            if (provinceArray.length < 1) {
+                provinceSelector.setAttribute("disabled", "disabled");
+            } else {
+                provinceSelector.removeAttribute("disabled");
+            }
 
-      provinceSelector.innerHTML = "";
-      var options = "";
-      for (var i = 0; i < provinceArray.length; i++) {
-        options +=
-          '<option value="' +
-          provinceArray[i][0] +
-          '">' +
-          provinceArray[i][0] +
-          "</option>";
-      }
+            provinceSelector.innerHTML = "";
+            var options = "";
+            for (var i = 0; i < provinceArray.length; i++) {
+                options +=
+                    '<option value="' +
+                    provinceArray[i][0] +
+                    '">' +
+                    provinceArray[i][0] +
+                    "</option>";
+            }
 
-      provinceSelector.innerHTML = options;
-    });
+            provinceSelector.innerHTML = options;
+        });
+}
+
+if (document.getElementById("AddressCountryEdit") != null) {
+    document
+        .getElementById("AddressCountryEdit")
+        .addEventListener("change", function(e) {
+            console.log("in here");
+            var provinces =
+                this.options[this.selectedIndex].getAttribute("data-provinces");
+            var provinceSelector = document.getElementById("AddressProvinceEdit");
+            var provinceArray = JSON.parse(provinces);
+
+            if (provinceArray.length < 1) {
+                provinceSelector.setAttribute("disabled", "disabled");
+            } else {
+                provinceSelector.removeAttribute("disabled");
+            }
+
+            provinceSelector.innerHTML = "";
+            var options = "";
+            for (var i = 0; i < provinceArray.length; i++) {
+                options +=
+                    '<option value="' +
+                    provinceArray[i][0] +
+                    '">' +
+                    provinceArray[i][0] +
+                    "</option>";
+            }
+
+            provinceSelector.innerHTML = options;
+        });
 }
 
 if (document.getElementById("filter-btn") != null) {
-  document.getElementById("filter-btn").addEventListener("click", function (e) {
-    const filters = document.querySelector(".filters-container");
-    filters.classList.add("show");
-  });
+    document.getElementById("filter-btn").addEventListener("click", function(e) {
+        const filters = document.querySelector(".filters-container");
+        filters.classList.add("show");
+    });
 }
 
 if (document.getElementById("close-filters-icon") != null) {
-  document
-    .getElementById("close-filters-icon")
-    .addEventListener("click", function (e) {
-      const filters = document.querySelector(".filters-container");
-      filters.classList.remove("show");
-    });
+    document
+        .getElementById("close-filters-icon")
+        .addEventListener("click", function(e) {
+            const filters = document.querySelector(".filters-container");
+            filters.classList.remove("show");
+        });
 }
 
 if (document.getElementById("forgotPassword") != null) {
-  document
-    .getElementById("forgotPassword")
-    .addEventListener("click", function (e) {
-      const element = document.querySelector("#forgot_password_form");
-      if (element.classList.contains("d-none")) {
-        element.classList.remove("d-none");
-        element.classList.add("d-block");
-      }
-    });
+    document
+        .getElementById("forgotPassword")
+        .addEventListener("click", function(e) {
+            const element = document.querySelector("#forgot_password_form");
+            if (element.classList.contains("d-none")) {
+                element.classList.remove("d-none");
+                element.classList.add("d-block");
+            }
+        });
 }
 
 // const productInfoAnchors = document.querySelectorAll("#productInfoAnchor");
@@ -143,18 +175,18 @@ if (document.getElementById("forgotPassword") != null) {
 //   updateCart();
 // });
 function updateCart() {
-  fetch("/cart")
-    .then((resp) => resp.json())
-    .then((data) => {
-      console.log(
-        "DATA",
-        data
-      )(
-        (document.getElementById("numberOfCartItems").innerHTML =
-          data.items.length)
-      );
-    })
-    .catch((err) => console.error(err));
+    fetch("/cart")
+        .then((resp) => resp.json())
+        .then((data) => {
+            console.log(
+                "DATA",
+                data
+            )(
+                (document.getElementById("numberOfCartItems").innerHTML =
+                    data.items.length)
+            );
+        })
+        .catch((err) => console.error(err));
 }
 
 const predictiveSearchInput = document.getElementById("searchInputField");
@@ -163,30 +195,30 @@ let timer;
 const offcanvasSearch = document.getElementById("offcanvasSearchResult");
 const bsOffcanvas = new bootstrap.Offcanvas(offcanvasSearch);
 if (predictiveSearchInput !== null) {
-  predictiveSearchInput.addEventListener("input", () => {
-    clearTimeout(timer);
-    if (predictiveSearchInput.value) {
-      timer = setTimeout(fetchPredictiveSearch, 800);
-    }
-  });
+    predictiveSearchInput.addEventListener("input", () => {
+        clearTimeout(timer);
+        if (predictiveSearchInput.value) {
+            timer = setTimeout(fetchPredictiveSearch, 800);
+        }
+    });
 }
 
 function fetchPredictiveSearch() {
-  fetch(
-    `/search/suggest.json?q=${predictiveSearchInput.value}&resources[type]=product`
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      const products = data.resources.results.products;
-      document.getElementById("search_results_body").innerHTML = "";
+    fetch(
+            `/search/suggest.json?q=${predictiveSearchInput.value}&resources[type]=product`
+        )
+        .then((res) => res.json())
+        .then((data) => {
+            const products = data.resources.results.products;
+            document.getElementById("search_results_body").innerHTML = "";
 
-      if (products.length === 0) {
-        document.getElementById(
-          "search_results_body"
-        ).innerHTML += `<div><h5>Non ci sono prodotti che corrispondono alla ricerca</h5></div>`;
-      } else {
-        products.forEach((product) => {
-          document.getElementById("search_results_body").innerHTML += `
+            if (products.length === 0) {
+                document.getElementById(
+                    "search_results_body"
+                ).innerHTML += `<div><h5>Non ci sono prodotti che corrispondono alla ricerca</h5></div>`;
+            } else {
+                products.forEach((product) => {
+                    document.getElementById("search_results_body").innerHTML += `
           <a href="${product.url}">
         <div class="search-suggestions card" style="width: 19rem;">
             <img src="${product.image} class="card-img-top">
@@ -199,10 +231,10 @@ function fetchPredictiveSearch() {
         </div>
         </a>
     `;
+                });
+            }
+            bsOffcanvas.show();
         });
-      }
-      bsOffcanvas.show();
-    });
 }
 
 const menu_btn = document.querySelector(".menu-btn");
@@ -211,8 +243,8 @@ const navbar = document.querySelector(".nav-bar");
 menu_btn.addEventListener("click", toggleMenu);
 
 function toggleMenu() {
-  navbar.classList.toggle("is-active");
-  menu_btn.classList.toggle("open");
+    navbar.classList.toggle("is-active");
+    menu_btn.classList.toggle("open");
 }
 
 const search_icon = document.querySelector(".search-icon");
@@ -220,12 +252,13 @@ const search_bar = document.querySelector(".search-bar");
 const close_search_bar = document.getElementById("close-searchbar");
 search_icon.addEventListener("click", openSearchBar);
 close_search_bar.addEventListener("click", closeSearchBar);
+
 function openSearchBar() {
-  search_bar.classList.add("is-active");
+    search_bar.classList.add("is-active");
 }
 
 function closeSearchBar() {
-  search_bar.classList.remove("is-active");
+    search_bar.classList.remove("is-active");
 }
 
 // var waypoint = new Waypoint({
@@ -236,27 +269,27 @@ function closeSearchBar() {
 // })
 
 $(".image-zoomable")
-  // tile mouse actions
-  .on("mouseover", function () {
-    console.log("here");
-    $(this)
-      .children(".img-product")
-      .css({ transform: "scale(" + $(this).attr("data-scale") + ")" });
-  })
-  .on("mouseout", function () {
-    $(this).children(".img-product").css({ transform: "scale(1)" });
-  })
-  .on("mousemove", function (e) {
-    $(this)
-      .children(".img-product")
-      .css({
-        "transform-origin":
-          ((e.pageX - $(this).offset().left) / $(this).width()) * 100 +
-          "% " +
-          ((e.pageY - $(this).offset().top) / $(this).height()) * 100 +
-          "%",
-      });
-  });
+    // tile mouse actions
+    .on("mouseover", function() {
+        console.log("here");
+        $(this)
+            .children(".img-product")
+            .css({ transform: "scale(" + $(this).attr("data-scale") + ")" });
+    })
+    .on("mouseout", function() {
+        $(this).children(".img-product").css({ transform: "scale(1)" });
+    })
+    .on("mousemove", function(e) {
+        $(this)
+            .children(".img-product")
+            .css({
+                "transform-origin":
+                    ((e.pageX - $(this).offset().left) / $(this).width()) * 100 +
+                    "% " +
+                    ((e.pageY - $(this).offset().top) / $(this).height()) * 100 +
+                    "%",
+            });
+    });
 
 // var myModal = new bootstrap.Modal(
 //   document.getElementById("exampleModalCenter"),
@@ -266,22 +299,21 @@ $(".image-zoomable")
 const productInfoAnchor = document.getElementById("testbutton");
 let productModal;
 if (document.getElementById("exampleModal") != null) {
-  productModal = new bootstrap.Modal(
-    document.getElementById("exampleModal"),
-    {}
-  );
-  console.log("productModal", productModal);
-  productModal.show();
+    productModal = new bootstrap.Modal(
+        document.getElementById("exampleModal"), {}
+    );
+    console.log("productModal", productModal);
+    productModal.show();
 }
 
-$(document).ready(function () {
-  $(".img-product").click(function () {
-    $("#carouselModal").modal("show");
-  });
+$(document).ready(function() {
+    $(".img-product").click(function() {
+        $("#carouselModal").modal("show");
+    });
 });
 
-$(document).ready(function () {
-  $(".close-modal").click(function () {
-    $("#carouselModal").modal("hide");
-  });
+$(document).ready(function() {
+    $(".close-modal").click(function() {
+        $("#carouselModal").modal("hide");
+    });
 });

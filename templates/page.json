@@ -1,20 +1,36 @@
 {
-  "sections": {
-    "template": {
-      "type": "template-page-default",
-      "blocks": {
-        "title": {
-          "type": "page_title"
-        },
-        "date": {
-          "type": "page_date"
-        },
-        "content": {
-          "type": "page_content"
+    "sections": {
+        "template": {
+            "type": "template-page-default",
+            "blocks": {
+                "title": {
+                    "type": "page_title",
+                    "settings": {
+                        "type": "text"
+                    }
+                },
+                "subtitle": {
+                    "type": "page_subtitle",
+                    "settings": {
+                        "type": "text"
+                    }
+                },
+
+                "content": {
+                    "type": "page_content",
+                    "settings": {
+                        "type": "richtext"
+                    }
+                },
+                "image": {
+                    "type": "page_image",
+                    "settings": {
+                        "type": "image_picker"
+                    }
+                }
+            },
+            "block_order": ["image", "title", "date", "content"]
         }
-      },
-      "block_order": ["title", "date", "content"]
-    }
-  },
-  "order": ["template"]
+    },
+    "order": ["template"]
 }

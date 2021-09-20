@@ -85,13 +85,13 @@
                             {% if image != blank %}
                                 <div class="img-container">
 
-                                    <a href="#" id="productInfoAnchor" product-handle="{{ product.handle }}" product-price="{{ product.price | money_without_trailing_zeros }}">
+                                    <a href={{product.url}}>
                                         <img class="product-list-image" src="{{ image | img_url: 'medium' }}" alt="{{ product.title }}">
                                     </a>
         </div>
         {% else %}
         <div class="img-container">
-            <a href="#" id="productInfoAnchor" product-handle="{{ product.handle }}" product-price="{{ product.price | money_without_trailing_zeros }}">
+            <a href={{product.url}}>
                                         {{ 'product-1' | placeholder_svg_tag: 'card-img-top' }}
                                     </a>
         </div>
