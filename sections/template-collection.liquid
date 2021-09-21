@@ -79,7 +79,15 @@
     </div>
 
     <div class="product-list-container">
-        {% for product in collection.products %} {% if product.vendor != "Cele Boutique Alghero" %} {% assign image = product.featured_media.preview_image %}
+        <script>
+            console.log({{collection.products | json}})
+        </script>
+        {% for product in collection.products %} 
+        
+        
+        {% if product.available == true %}
+            
+        {% if product.vendor != "Cele Boutique Alghero" %} {% assign image = product.featured_media.preview_image %}
         <div class="product-card">
             <a href="{{ product.url }}">
                             {% if image != blank %}
@@ -105,7 +113,8 @@
         </a>
         </a>
     </div>
-    {% endif %} {% else %}
+    {% endif %}        {% endif %}
+    {% else %}
     <p>Nessun risultato</p>
     {% endfor %}
 </div>

@@ -26,15 +26,13 @@
                             <a>Designer</a>
                             <ul class="sub-menu">
                                 {% for product_vendor in shop.vendors %}
-                                    <li class="menu-item">
+                                <li class="menu-item">
 
-                                        {% if product_vendor != "Cele Boutique Alghero" %}
-                                            <a href="/collections/vendors?q={{product_vendor | downcase }}">{{ product_vendor }}</a>
+                                    {% if product_vendor != "Cele Boutique Alghero" %}
+                                    <a href="/collections/vendors?q={{product_vendor | downcase }}">{{ product_vendor }}</a> {% endif %}
 
-                                        {% endif %}
-
-                                    </li>
-                                    <!-- {{ product_vendor | link_to_vendor }} -->
+                                </li>
+                                <!-- {{ product_vendor | link_to_vendor }} -->
                                 {% endfor %}
 
                             </ul>
@@ -47,6 +45,10 @@
                 </li>
                 <li class="menu-item">
                     <a href="/collections/types?q=Scarpe">Scarpe
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="/collections/types?q=Scarpe">Saldi
                     </a>
                 </li>
                 <li class="menu-item has-sub-menu">
@@ -72,26 +74,19 @@
             <div class="search-bar">
                 <img class="search-bar-icon" alt="" src="{{ 'search.svg' | asset_url }}">
                 <form action="/search" method="GET" role="search">
-                    <input class="search-bar-input" id="searchInputField" placeholder="Cerca per parola chiave" type="text" name="q" value="{{ search.terms | escape }}">
+                    <input class="px-1 search-bar-input" id="searchInputField" placeholder="Cerca per parola chiave" type="text" name="q" value="{{ search.terms | escape }}">
                 </form>
                 <button id="close-searchbar"><img class="close-search-bar-icon" alt="" src="{{ 'close.svg' | asset_url }}"></button>
 
 
             </div>
-            <button class="search-icon"><img alt="" src="{{ 'search.svg' | asset_url }}"></button>
-            {% if shop.customer_accounts_enabled %}
-                {% if customer %}
-                    <button class="user-icon">
+            <button class="search-icon"><img alt="" src="{{ 'search.svg' | asset_url }}"></button> {% if shop.customer_accounts_enabled %} {% if customer %}
+            <button class="user-icon">
                         <a href="{{ routes.account_url }}"><img alt="" src="{{ 'user.svg' | asset_url }}"></a>
-                    </button>
-
-                {% else %}
-                    <button class="user-icon">
+                    </button> {% else %}
+            <button class="user-icon">
                         <a href="{{ routes.account_login_url }}"><img alt="" src="{{ 'user.svg' | asset_url }}"></a>
-                    </button>
-
-                {% endif %}
-            {% endif %}
+                    </button> {% endif %} {% endif %}
             <button class="bag-icon">
                 <a href="/cart"><img alt="" src="{{ 'bag.svg' | asset_url }}">
                     <span class="cart-badge" id="numberOfCartItems">{{cart.item_count}}</span>

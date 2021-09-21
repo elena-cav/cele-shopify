@@ -6,11 +6,11 @@
 
 
         <div class="col">
-            <div class="card my-1 rounded-0">
+            <div class="card my-1 rounded-0 address-card d-flex flex-column text-center align-content-center justify-content-center">
                 {% if address == customer.default_address %}
-                <p class="text-center text-muted">Default</p>
+                <p class=" text-muted">Default</p>
                 {% endif %}
-                <div class="card-body text-center">
+                <div class="card-body">
                     {{address | format_address}}
                 </div>
                 <div class="card-footer g-2 d-inline-flex align-content-center justify-content-center">

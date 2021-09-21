@@ -1,74 +1,67 @@
-<div class="container cart my-5">
+<div class="container cart mb-5">
     {% if cart.item_count > 0 %}
 
-        <div class="row">
-            <p class="h2 my-5 text-center">Carrello</p>
-        </div>
-        <div class="mb-4">
-            <form action="/cart" class="row" method="POST" novalidate>
-                <div class="cart-page">
-                    <div class="cart-items">
-                        {% for item in cart.items %}
-                            <div class="cart-item">
-                                <div class="image-block">
+    <div class="row">
+        <p class="h2 mb-5 text-center">Carrello</p>
+    </div>
+    <div class="mb-4">
+        <form action="/cart" class="row" method="POST" novalidate>
+            <div class="cart-page">
+                <div class="cart-items">
+                    {% for item in cart.items %}
+                    <div class="cart-item">
+                        <div class="image-block">
 
-                                    <a href="{{ item.url | within: collections.all }}">
-                                        <img src="{{ item | img_url: 'large' }}" alt="{{ item.title | escape }}">
-                                    </a>
-                                    <div>
-                                        <a href="{{ item.url }}">{{ item.product.title }}</a>
-                                        <p class="small">{{ item.variant.title }}</p>
-                                    </div>
-                                </div>
-                                <div class="summary-block">
-                                    <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0">
-                                    <div class="price-block">
-                                        <p class="font-weight-bold">
-                                            {{ item.price | money }}
-                                        </p>
-                                        {% if item.original_line_price != item.line_price %}
-                                            <p>
-                                                {{ item.original_line_price | money }}</p>
-                                        {% endif %}
-                                        {% if item.line_price != item.price %}
-                                            <p>Totale:
-                                                {{ item.line_price | money }}</p>
-                                        {% endif %}
-
-
-                                        {% for discount in item.discounts %}
-                                            {{ discount.title }}
-                                        {% endfor %}
-                                        <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">Rimuovi</a>
-                                    </div>
-                                </div>
+                            <a href="{{ item.url | within: collections.all }}">
+                                <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
+                            </a>
+                            <div>
+                                <a href="{{ item.url }}">{{ item.product.title }}</a>
+                                <p class="small">{{ item.variant.title }}</p>
                             </div>
-                        {% endfor %}
-                    </div>
-                    <div class="cart-summary">
-                        <h1 class="text-uppercase">Totale</h1>
-                        <div class="cart-total-block">
-                            <p>{{ cart.total_price | money }}</p>
                         </div>
-
-                        <div class="cart-checkout-buttons mt-3 d-grid gap-2">
-                            <button class="btn btn-dark rounded-0" name="update" type="submit">Aggiorna</button>
-                            <button class="btn btn-dark rounded-0" name="checkout" type="submit">Checkout</button>
+                        <div class="summary-block">
+                            <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0">
+                            <div class="price-block">
+                                <p class="font-weight-bold">
+                                    {{ item.price | money }}
+                                </p>
+                                {% if item.original_line_price != item.line_price %}
+                                <p>
+                                    {{ item.original_line_price | money }}</p>
+                                {% endif %} {% if item.line_price != item.price %}
+                                <p>Totale: {{ item.line_price | money }}</p>
+                                {% endif %} {% for discount in item.discounts %} {{ discount.title }} {% endfor %}
+                                <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">Rimuovi</a>
+                            </div>
                         </div>
-                        <p class="note mt-3">
-                            I costi di spedizione verranno calcolati al Checkout
-                        </p>
                     </div>
+                    {% endfor %}
                 </div>
-            </form>
-        </div>
+                <div class="cart-summary">
+                    <h1 class="text-uppercase">Totale</h1>
+                    <div class="cart-total-block">
+                        <p>{{ cart.total_price | money }}</p>
+                    </div>
+
+                    <div class="cart-checkout-buttons mt-3 d-grid gap-2">
+                        <button class="btn btn-dark rounded-0" name="update" type="submit">Aggiorna</button>
+                        <button class="btn btn-dark rounded-0" name="checkout" type="submit">Checkout</button>
+                    </div>
+                    <p class="note mt-3">
+                        I costi di spedizione verranno calcolati al Checkout
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
 
     {% else %}
 
-        <div class="row">
-            <h2 class="text-center">Carrello</h2>
-            <p class="text-center">Il carrello è vuoto</p>
-        </div>
+    <div class="row">
+        <h2 class="text-center">Carrello</h2>
+        <p class="text-center">Il carrello è vuoto</p>
+    </div>
 
     {% endif %}
 </div>

@@ -11,7 +11,6 @@ if (document.getElementById("AddressCountryNew") != null) {
     document
         .getElementById("AddressCountryNew")
         .addEventListener("change", function(e) {
-            console.log("in here");
             var provinces =
                 this.options[this.selectedIndex].getAttribute("data-provinces");
             var provinceSelector = document.getElementById("AddressProvinceNew");
@@ -42,7 +41,6 @@ if (document.getElementById("AddressCountryEdit") != null) {
     document
         .getElementById("AddressCountryEdit")
         .addEventListener("change", function(e) {
-            console.log("in here");
             var provinces =
                 this.options[this.selectedIndex].getAttribute("data-provinces");
             var provinceSelector = document.getElementById("AddressProvinceEdit");
@@ -271,7 +269,6 @@ function closeSearchBar() {
 $(".image-zoomable")
     // tile mouse actions
     .on("mouseover", function() {
-        console.log("here");
         $(this)
             .children(".img-product")
             .css({ transform: "scale(" + $(this).attr("data-scale") + ")" });
