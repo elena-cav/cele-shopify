@@ -218,11 +218,14 @@ ul {
 
 .product-detail-container {
     margin-top: auto;
-    p {
+    p, del {
         font-size: 0.8rem;
     }
+
+
     .price {
         font-weight: bold;
+        margin-right: 4px; 
     }
 }
 
@@ -329,7 +332,7 @@ ul {
                             opacity: 0;
                             transform: translateY(-200px);
                             pointer-events: none;
-                            transition: 0.6s ease-out;
+                            transition: 0.5s ease-out;
                             min-width: 100%;
                             width: max-content;
                             background-color: #f5f5f5;
@@ -369,7 +372,7 @@ ul {
                 background-color: #f5f5f5;
                 opacity: 0;
                 pointer-events: none;
-                transition: 0.6s ease-out;
+                transition: 0.5s ease-out;
                 &.is-active {
                     opacity: 1;
                     pointer-events: all;
@@ -580,9 +583,27 @@ ul {
         transition: transform 0.5s ease-out;
     }
     .description-block {
+        position: relative;
         grid-area: infoblock;
         background-color: white;
         padding: 2rem;
+
+        .saldi {
+            position: absolute;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            top: -15px;
+            left: 15px;
+            color: $grey;
+            font-weight: bold;
+        }
+        p {
+            margin-right: 5px 
+        }
+
+        .compare-at-price {
+            color: $grey; 
+        }
     }
     .first-images-wrapper,
     .second-images-wrapper {

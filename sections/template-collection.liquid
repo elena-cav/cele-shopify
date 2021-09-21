@@ -33,7 +33,9 @@
         <div class="filter-section">
             <p>Filtra</p>
             <div class="filter-subsection">
+
                 {%- for filter in collection.filters -%}
+                
                 <form>
 
                     <div class="dropdown rounded-0">
@@ -41,7 +43,12 @@
                                         {{filter.label}}
                                     </button>
                         <ul aria-labelledby="dropdownMenuButton-{{forloop.index}}" class="dropdown-menu checkbox-menu" id="dropdownMenu-{{forloop.index}}">
-                            {%- for filter_value in filter.values -%} {% if filter_value.value != "Cele Boutique Alghero" %}
+
+                            {%- for filter_value in filter.values -%} 
+
+
+                            {% if filter_value.value != "Cele Boutique Alghero" and filter_value.value != "Buoni regalo"  %}
+                           
                             <li>
                                 <input type="checkbox" name="{{ filter_value.param_name }}" value="{{ filter_value.value }}" id="Filter-{{ filter.label }}-{{ forloop.index }}" {% if filter_value.active -%} checked {%- endif %} {% if filter_value.count==0 and filter_value.active==false
                                     -%} disabled {%- endif %}>
@@ -106,10 +113,17 @@
         {% endif %}
         <a href={{product.url}}>
             <div class="mt-2 product-detail-container">
-                <p class="">{{product.vendor}}</p>
-                <p class="">{{ product.title }}</p>
-                <p class="price">{{ product.price | money_without_trailing_zeros }}</p>
-            </div>
+                <p >{{product.vendor}}</p>
+                <p >{{ product.title }}</p>
+                <div class="d-flex flex-row">
+                    <p class="price">{{ product.price | money_without_trailing_zeros }}</p>
+                    {% if product.compare_at_price %}
+                    <del>{{product.compare_at_price | money_without_trailing_zeros}}</del>
+                    {% endif %}
+                </div>
+
+                    
+                            </div>
         </a>
         </a>
     </div>

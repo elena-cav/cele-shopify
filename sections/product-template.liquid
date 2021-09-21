@@ -12,8 +12,18 @@
             </div>
         </div>
         <div class="description-block">
+            {% for collection in product.collections %}
+            {% if      collection.title  == "Saldi"
+            %}
+                <p class='saldi'>Saldi</p>
+            {% endif %}
+{% endfor %}
+
             <h1>{{ product.title }}</h1>
+            <div class='d-flex flex-row'>
             <p>{{ current_product.price | money_without_trailing_zeros }}</p>
+            <del class='compare-at-price'>{{ current_product.compare_at_price | money_without_trailing_zeros }}</del>
+        </div>
         </div>
         <div class="add-to-cart-block">
             {% form 'product', product, class:"product-form", id:"AddToCartForm" %}
