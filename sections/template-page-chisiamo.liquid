@@ -1,8 +1,8 @@
-<div class="page-template container my-5">
+<div class="page-template container my-3">
     {% for block in section.blocks %} {% case block.type %} {% when 'page_title' %}
     <h1 class="text-uppercase">{{ block.settings.title }}</h1>
     {% when 'page_image' %}
-    <img src="{{ block.settings.image | img_url: 'large' }}" alt="" /> {% when 'page_subtitle' %}
+    <img src="{{ block.settings.image | img_url: 'small' }}" alt="" /> {% when 'page_subtitle' %}
     <p class="subtitle mt-1">{{ block.settings.subtitle }}</p>
     {% when 'page_content' %}
     <div class="my-1">

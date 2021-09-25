@@ -1,34 +1,62 @@
-{% assign current_product = product.selected_or_first_available_variant %} {% assign product_image = current_product.featured_image | default: product.featured_image%}
+{% assign current_product = product.selected_or_first_available_variant %} {%
+assign product_image = current_product.featured_image | default:
+product.featured_image%}
 
 <div class="mt-2 container">
-    <div class="grid-container">
-        <div class="first-images-wrapper">
-            <div class="img-1 image-zoomable" data-scale="2">
-                <a class="img-product" target="_self" href="#carouselModal" data-toggle="modal" style="background: center / cover no-repeat url('{{ product.media[0] | img_url: 'large' }}')"></a>
-            </div>
-            <div class="img-2 image-zoomable" data-scale="2">
-                <a class="img-product" target="_self" href="#carouselModal" data-toggle="modal" style="background: center / cover no-repeat url('{{ product.media[1] | img_url: 'large' }}')">
-                </a>
-            </div>
-        </div>
-        <div class="description-block">
-            {% for collection in product.collections %}
-            {% if      collection.title  == "Saldi"
-            %}
-                <p class='saldi'>Saldi</p>
-            {% endif %}
-{% endfor %}
+  <div class="grid-container">
+    <div class="first-images-wrapper">
+      <div class="img-1 image-zoomable" data-scale="2">
+        <a
+          class="img-product"
+          target="_self"
+          href="#carouselModal"
+          data-toggle="modal"
+          style="background: center / cover no-repeat url('{{
+            product.media[0] | img_url: 'large'
+          }}')"
+        ></a>
+      </div>
+      <div class="long-description">
+        <h1>Ci piace perché...</h1>
+        <p>
+          {{ product.description | split: "SPLIT" | first }}
+        </p>
+      </div>
 
-            <h1>{{ product.title }}</h1>
-            <div class='d-flex flex-row'>
-            <p>{{ current_product.price | money_without_trailing_zeros }}</p>
-            <del class='compare-at-price'>{{ current_product.compare_at_price | money_without_trailing_zeros }}</del>
-        </div>
-        </div>
-        <div class="add-to-cart-block">
-            {% form 'product', product, class:"product-form", id:"AddToCartForm" %}
-            <div class="cart-form mb-3">
-                <select class="form-select rounded-0" id="productSelect" name="id">
+      <!-- <div class="img-2 image-zoomable" data-scale="2">
+        <a
+          class="img-product"
+          target="_self"
+          href="#carouselModal"
+          data-toggle="modal"
+          style="background: center / cover no-repeat url('{{
+            product.media[1] | img_url: 'large'
+          }}')"
+        >
+        </a>
+      </div> -->
+    </div>
+    <div class="description-block">
+      {% for collection in product.collections %} {% if collection.title ==
+      "Saldi" %}
+      <p class="saldi">Saldi</p>
+      {% endif %} {% endfor %}
+      <p class="vendor">{{ product.vendor }}</p>
+
+      <h1>{{ product.title }}</h1>
+
+      <div class="d-flex flex-row">
+        <p>{{ current_product.price | money_without_trailing_zeros }}</p>
+        <del class="compare-at-price">{{
+          current_product.compare_at_price | money_without_trailing_zeros
+        }}</del>
+      </div>
+      <p class='point-description'>{{ product.description | split: "SPLIT" | last }}</p>
+    </div>
+    <div class="add-to-cart-block">
+      {% form 'product', product, class:"product-form", id:"AddToCartForm" %}
+      <div class="cart-form mb-3">
+        <select class="form-select rounded-0" id="productSelect" name="id">
           {% for variant in product.variants %} {% if variant.available %}
           <option value="{{ variant.id }}">{{ variant.title }}</option>
           {% else %}
@@ -36,128 +64,220 @@
 
           {% endif %} {% endfor %}
         </select>
-                <div class="mb-3">
-                    <input class="form-control rounded-0 mt-2" id="quantity" min="1" name="quantity" type="number" value="1" />
-                </div>
-                <button class="text-uppercase btn rounded-0 btn-dark w-100" id="addToCart" name="add" type="submit">
+        <div class="mb-3">
+          <input
+            class="form-control rounded-0 mt-2"
+            id="quantity"
+            min="1"
+            name="quantity"
+            type="number"
+            value="1"
+          />
+        </div>
+        <button
+          class="text-uppercase btn rounded-0 btn-dark w-100"
+          id="addToCart"
+          name="add"
+          type="submit"
+        >
           Aggiungi
         </button>
-            </div>
-            {% if section.settings.dybamic_button_checkbox %} {{ form | payment_button }}{% endif %} {% endform %}
-        </div>
-        <div class="second-images-wrapper">
-            <div class="img-3 image-zoomable" data-scale="2">
-                <a class="img-product" href="#carouselModal" data-toggle="modal" style="background: center / cover no-repeat url('{{ product.media[2] | img_url: 'large' }}')"></a>
-            </div>
-            <div class="img-4 image-zoomable" data-scale="2">
-                <button class="img-product" style="background: center / cover no-repeat url('{{ product.media[3] | img_url: 'large' }}')" href="#carouselModal" data-toggle="modal"></button>
-            </div>
-        </div>
+      </div>
+      {% if section.settings.dybamic_button_checkbox %}
+      {{ form | payment_button }}{% endif %} {% endform %}
     </div>
+    <div class="second-images-wrapper">
+      <div class="img-2 image-zoomable" data-scale="2">
+        <a
+          class="img-product"
+          href="#carouselModal"
+          data-toggle="modal"
+          style="background: center / cover no-repeat url('{{
+            product.media[1] | img_url: 'large'
+          }}')"
+        ></a>
+      </div>
+      <div class="img-3 image-zoomable" data-scale="2">
+        <a
+          class="img-product"
+          style="background: center / cover no-repeat url('{{
+            product.media[2] | img_url: 'large'
+          }}')"
+          href="#carouselModal"
+          data-toggle="modal"
+        ></a>
+      </div>
+    </div>
+  </div>
 
-    <div id="carouselModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content rounded-0">
-
-                <div class="modal-body p-0">
-
-                    <button type="button" class="close-modal" data-dismiss="modal">
-            <img class="close-modal-icon" src="{{'close.svg' | asset_url}}" alt="">
+  <div id="carouselModal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content rounded-0">
+        <div class="modal-body p-0">
+          <button type="button" class="close-modal" data-dismiss="modal">
+            <img
+              class="close-modal-icon"
+              src="{{ 'close.svg' | asset_url }}"
+              alt=""
+            />
           </button>
-                    <div id="carousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                            <button type="button" data-bs-target="#carousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+          <div
+            id="carousel"
+            class="carousel carousel-dark slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-indicators">
+              <button
+                type="button"
+                data-bs-target="#carousel"
+                data-bs-slide-to="0"
+                class="active"
+                aria-current="true"
+                aria-label="Slide 1"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carousel"
+                data-bs-slide-to="1"
+                aria-label="Slide 2"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carousel"
+                data-bs-slide-to="2"
+                aria-label="Slide 3"
+              ></button>
 
-                        </div>
-                        <div class="carousel-inner">
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active" data-bs-interval="10000">
+                <img
+                  src="{{ product.media[0] | img_url: 'large' }}"
+                  class="d-block w-100"
+                  alt="..."
+                />
+              </div>
+              <div class="carousel-item" data-bs-interval="2000">
+                <img
+                  src="{{ product.media[1] | img_url: 'large' }}"
+                  class="d-block w-100"
+                  alt="..."
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="{{ product.media[2] | img_url: 'large' }}"
+                  class="d-block w-100"
+                  alt="..."
+                />
+              </div>
 
-                            <div class="carousel-item active" data-bs-interval="10000">
-                                <img src="{{ product.media[0] | img_url: 'large' }}" class="d-block w-100" alt="..." />
-                            </div>
-                            <div class="carousel-item" data-bs-interval="2000">
-                                <img src="{{ product.media[1] | img_url: 'large' }}" class="d-block w-100" alt="..." />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="{{ product.media[2] | img_url: 'large' }}" class="d-block w-100" alt="..." />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="{{ product.media[3] | img_url: 'large' }}" class="d-block w-100" alt="..." />
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carousel"
+              data-bs-slide="prev"
+            >
               <span
                 class="carousel-control-prev-icon"
                 aria-hidden="true"
               ></span>
               <span class="visually-hidden">Previous</span>
             </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carousel"
+              data-bs-slide="next"
+            >
               <span
                 class="carousel-control-next-icon"
                 aria-hidden="true"
               ></span>
               <span class="visually-hidden">Next</span>
             </button>
-                    </div>
-                </div>
-
-            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 
-    <div class="container">
-        <section class="row content-justify-center my-5" id="product_recommendation">
-            <div class="text-center">
-                <h1 class='mb-2'>Ti potrebbe anche piacere</h1>
-            </div>
-            <div class='recommendations-container' id="product_recommendation_body"></div>
-        </section>
-    </div>
-    <script>
-        const productRecommendationBody = document.getElementById(
-            "product_recommendation_body"
-        );
-        fetch(
-                "/recommendations/products.json?product_id={{product.id}}&section_id=product-recommendations"
-            )
-            .then((res) => res.json())
-            .then(({
-                products
-            }) => {
-                if (products.length > 0) {
-                    products.forEach((product) => {
-                        const stringifiedPrice = product.price.toString()
-                        const price = stringifiedPrice.substring(stringifiedPrice.length - 2) === "00" ? `€${stringifiedPrice.substring(0, stringifiedPrice.length-2)}` : `€${stringifiedPrice.substring(0, stringifiedPrice.length-2)},${stringifiedPrice.substring(stringifiedPrice.length-2)}`
-                        let card;
-                        card = '<div>';
-                        card += '<div class="card border-0" style="height: 25rem; width: 15rem;">';
+  <div class="container">
+    <section
+      class="row content-justify-center my-5"
+      id="product_recommendation"
+    >
+      <div class="text-center">
+        <h1 class="mb-2">Ti potrebbe anche piacere</h1>
+      </div>
+      <div
+        class="recommendations-container"
+        id="product_recommendation_body"
+      ></div>
+    </section>
+  </div>
+  <script>
+    const productRecommendationBody = document.getElementById(
+      "product_recommendation_body"
+    );
+    fetch(
+      "/recommendations/products.json?product_id={{product.id}}&section_id=product-recommendations"
+    )
+      .then((res) => res.json())
+      .then(({ products }) => {
+        if (products.length > 0) {
+          products.forEach((product) => {
+            const stringifiedPrice = product.price.toString();
+            const price =
+              stringifiedPrice.substring(stringifiedPrice.length - 2) === "00"
+                ? `€${stringifiedPrice.substring(
+                    0,
+                    stringifiedPrice.length - 2
+                  )}`
+                : `€${stringifiedPrice.substring(
+                    0,
+                    stringifiedPrice.length - 2
+                  )},${stringifiedPrice.substring(
+                    stringifiedPrice.length - 2
+                  )}`;
+            let card;
+            card = "<div>";
+            card +=
+              '<div class="card rec-card border-0 rounded-0" style="height: 25rem; width: 15rem;">';
 
-                        if (product.images.length > 0) {
-                            card += '<a href="' +
-                                product.url +
-                                '">'
-                            card +=
-                                '<img class="card-img-top" src="' + product.images[0] + '">';
-                        }
-                        card += '<div class="card-body">';
-                        card +=
+            if (product.images.length > 0) {
+              card += '<a href="' + product.url + '">';
+              card +=
+                '<img class="card-img-top rounded-0 rec-img" src="' +
+                product.images[0] +
+                '">';
+            }
+            card += '<div class="card-body">';
+            card += "<p class='vendor'>" + product.vendor + "</p>";
+            card += product.title + "</p>";
 
-                            product.title +
-                            "</p>";
+            card += '<p class="text-sm">' + price + "</p>";
 
-                        card +=
-                            '<p class="text-sm">' +
-                            price +
-                            "</p>"
+            card += "</div></a></div></div>";
+            productRecommendationBody.innerHTML += card;
+          });
+        }
+      });
+  </script>
+  {% schema %}
 
-                        card += "</div></a></div></div>";
-                        productRecommendationBody.innerHTML += card;
-                    });
-                }
-            });
-    </script>
-    {% schema %} { "name": "Product pages", "settings": [ { "type": "checkbox", "id": "dynamic_buttons_checkbox", "label": "Abilita il bottone dinamico", "default": false } ] } {% endschema %}
+{
+    "name": "Product pages",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "dynamic_buttons_checkbox",
+            "label": "Abilita il bottone dinamico",
+            "default": false
+        }
+    ]
+}
+
+{% endschema %}
 </div>

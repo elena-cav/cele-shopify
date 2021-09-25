@@ -1,0 +1,36 @@
+{
+  "sections": {
+    "template": {
+      "type": "template-page-negozio",
+      "blocks": {
+        "title": {
+          "type": "page_title",
+          "settings": {
+            "type": "text"
+          }
+        },
+        "subtitle": {
+          "type": "page_subtitle",
+          "settings": {
+            "type": "text"
+          }
+        },
+
+        "content": {
+          "type": "page_content",
+          "settings": {
+            "type": "richtext"
+          }
+        },
+        "image": {
+          "type": "page_image",
+          "settings": {
+            "type": "image_picker"
+          }
+        }
+      },
+      "block_order": ["image", "title", "date", "content"]
+    }
+  },
+  "order": ["template"]
+}

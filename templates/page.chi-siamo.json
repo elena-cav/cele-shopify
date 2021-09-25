@@ -1,7 +1,7 @@
 {
     "sections": {
         "template": {
-            "type": "template-page-default",
+            "type": "template-page-chisiamo",
             "blocks": {
                 "title": {
                     "type": "page_title",

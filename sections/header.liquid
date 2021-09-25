@@ -2,8 +2,7 @@
     <div class="nav-container">
         <div class="brand">
             <a class="nav-link" href="/">
-                <h2>Cele</h2>
-
+                <img src="{{ 'cele-sm.png' | asset_url }}" alt="">
             </a>
         </div>
 
@@ -26,13 +25,14 @@
                             <a>Designer</a>
                             <ul class="sub-menu">
                                 {% for product_vendor in shop.vendors %}
-                                <li class="menu-item">
+                                    <li class="menu-item">
 
-                                    {% if product_vendor != "Cele Boutique Alghero" %}
-                                    <a href="/collections/vendors?q={{product_vendor | downcase }}">{{ product_vendor }}</a> {% endif %}
+                                        {% if product_vendor != "Cele Boutique Alghero" %}
+                                            <a href="/collections/vendors?q={{product_vendor | downcase }}">{{ product_vendor }}</a>
+                                        {% endif %}
 
-                                </li>
-                                <!-- {{ product_vendor | link_to_vendor }} -->
+                                    </li>
+                                    <!-- {{ product_vendor | link_to_vendor }} -->
                                 {% endfor %}
 
                             </ul>
@@ -80,13 +80,18 @@
 
 
             </div>
-            <button class="search-icon"><img alt="" src="{{ 'search.svg' | asset_url }}"></button> {% if shop.customer_accounts_enabled %} {% if customer %}
-            <button class="user-icon">
+            <button class="search-icon"><img alt="" src="{{ 'search.svg' | asset_url }}"></button>
+            {% if shop.customer_accounts_enabled %}
+                {% if customer %}
+                    <button class="user-icon">
                         <a href="{{ routes.account_url }}"><img alt="" src="{{ 'user.svg' | asset_url }}"></a>
-                    </button> {% else %}
-            <button class="user-icon">
+                    </button>
+                {% else %}
+                    <button class="user-icon">
                         <a href="{{ routes.account_login_url }}"><img alt="" src="{{ 'user.svg' | asset_url }}"></a>
-                    </button> {% endif %} {% endif %}
+                    </button>
+                {% endif %}
+            {% endif %}
             <button class="bag-icon">
                 <a href="/cart"><img alt="" src="{{ 'bag.svg' | asset_url }}">
                     <span class="cart-badge" id="numberOfCartItems">{{cart.item_count}}</span>

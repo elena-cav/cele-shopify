@@ -1,66 +1,83 @@
 <div class="hero-page">
     <section class="inner-hero-section">
         <div class="overlay"></div>
-        {% for block in section.blocks %} {% if block.type == 'main' %} {% if block.settings.image != blank %}
-        <img c lass="hero-image" src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.image.alt}}"> {% else %} {% assign placeholder = 'lifestyle-2' %} {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }} {% endif %}
+        {% for block in section.blocks %}
+            {% if block.type == 'main' %}
+                {% if block.settings.image != blank %}
+                    <img c lass="hero-image" src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.image.alt}}">
+                {% else %}
+                    {% assign placeholder = 'lifestyle-2' %}
+                    {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
 
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-lg-6 col-md-8 mx-auto ">
-                    <h1 class="font-weight-bold text-white text-uppercase">{{ block.settings.title }}</h1>
-                    <button class="btn hero-btn rounded-0">
+                <div class="container py-5">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-8 mx-auto ">
+                            <h1 class="font-weight-bold text-white text-uppercase">{{ block.settings.title }}</h1>
+                            <button class="btn hero-btn rounded-0">
                                 <a class="font-weight-bold text-uppercase text-white" href="{{ block.settings.button_link }}">{{ block.settings.button_label }}</a>
                             </button>
-                </div>
-            </div>
-        </div>
-    </section>
-    <div class="hero-subsection-block">
-
-        {% elsif block.type == 'left' %}
-        <div class="hero-subsection">
-            <div class="overlay"></div>
-
-            {% if block.settings.image != blank %}
-            <img class="hero-image pr-1" src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.image.alt}}"> {% else %} {% assign placeholder = 'lifestyle-2' %} {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }} {% endif
-            %}
-
-            <div class="container py-5">
-                <div class="row">
-                    <div class="col-lg-6 col-md-8 mx-auto ">
-                        <h2 class="font-weight-bold text-white text-uppercase">{{ block.settings.title }}</h2>
-                        <a href="{{ block.settings.button_link }}" class="text-uppercase text-white btn hero-btn rounded-0">{{ block.settings.button_label }}</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </section>
+            <div class="hero-subsection-block">
 
-        {% elsif block.type == 'right' %}
-        <div class="hero-subsection">
-            <div class="overlay"></div>
+            {% elsif block.type == 'left' %}
+                <div class="hero-subsection">
+                    <div class="overlay"></div>
 
-            {% if block.settings.image != blank %}
-            <img class="pl-1 hero-image" src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.image.alt}}"> {% else %} {% assign placeholder = 'lifestyle-2' %} {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }} {% endif
+                    {% if block.settings.image != blank %}
+                        <img class="hero-image pr-1" src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.image.alt}}">
+                    {% else %}
+                        {% assign placeholder = 'lifestyle-2' %}
+                        {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}
+                    {% endif
             %}
 
-            <div class="container py-5">
-                <div class="row">
-                    <div class="col-lg-6 col-md-8 mx-auto ">
-                        <h2 class="font-weight-bold text-white text-uppercase">{{ block.settings.title }}</h2>
-                        <a href="{{ block.settings.button_link }}" class="text-uppercase text-white btn hero-btn rounded-0">{{ block.settings.button_label }}</a>
+                    <div class="container py-5">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-8 mx-auto ">
+                                <h1 class="font-weight-bold text-white text-uppercase">{{ block.settings.title }}</h1>
+                                <a href="{{ block.settings.button_link }}" class="text-uppercase text-white btn hero-btn rounded-0">{{ block.settings.button_label }}</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+            {% elsif block.type == 'right' %}
+                <div class="hero-subsection">
+                    <div class="overlay"></div>
+
+                    {% if block.settings.image != blank %}
+                        <img class="pl-1 hero-image" src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.image.alt}}">
+                    {% else %}
+                        {% assign placeholder = 'lifestyle-2' %}
+                        {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}
+                    {% endif
+            %}
+
+                    <div class="container py-5">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-8 mx-auto ">
+                                <h1 class="font-weight-bold text-white text-uppercase">{{ block.settings.title }}</h1>
+                                <a href="{{ block.settings.button_link }}" class="text-uppercase text-white btn hero-btn rounded-0">{{ block.settings.button_label }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-        </div>
 
-    </div>
-
-    {% endif %} {% endfor %}
+        {% endif %}
+    {% endfor %}
 </div>
 
-{% schema %} { "name": "Hero", "class": "hero-section", "settings": [ { "type": "text", "id": "title", "label": "Slideshow" } ], "blocks": [ { "name": "Principale", "type": "main", "settings": [ { "type": "image_picker", "id": "image", "label": "Sfondo"
+{% schema %}
+{ "name": "Hero", "class": "hero-section", "settings": [ { "type": "text", "id": "title", "label": "Slideshow" } ], "blocks": [ { "name": "Principale", "type": "main", "settings": [ { "type": "image_picker", "id": "image", "label": "Sfondo"
 }, { "type": "text", "id": "title", "default": "Titolo esempio", "label": "Titolo" }, { "type": "text", "id": "button_label", "default": "Button", "label": "Etichetta del bottone" }, { "type": "url", "id": "button_link", "label": "Link del bottone" }
 ] }, { "name": "Sinistra secondaria", "type": "left", "settings": [ { "type": "image_picker", "id": "image", "label": "Sfondo" }, { "type": "text", "id": "title", "default": "Titolo esempio", "label": "Titolo" }, { "type": "text", "id": "button_label",
 "default": "Button", "label": "Etichetta del bottone" }, { "type": "url", "id": "button_link", "label": "Link del bottone" } ] }, { "name": "Destra secondaria", "type": "right", "settings": [ { "type": "image_picker", "id": "image", "label": "Sfondo"
 }, { "type": "text", "id": "title", "default": "Titolo esempio", "label": "Titolo" }, { "type": "text", "id": "button_label", "default": "Button", "label": "Etichetta del bottone" }, { "type": "url", "id": "button_link", "label": "Link del bottone" }
-] } ] } {% endschema %}
+] } ] }
+{% endschema %}
