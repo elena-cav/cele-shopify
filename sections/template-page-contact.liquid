@@ -13,17 +13,22 @@
                 </div>
             {% endif %}
 
-            {{ form.errors | default_errors }}
+            <!-- {{ form.errors | default_errors }} -->
 
             <div class="row">
                 <div class="col-12 col-md-6">
                     <label for="ContactFormName">Nome</label>
-                    <input class="form-control rounded-0" id="ContactFormName" name="contact[name]" type="text">
+                    <input class="form-control rounded-0" id="ContactFormName" name="contact[first_name]" type="text">
                 </div>
                 <div class="col-12 col-md-6">
-                    <label for="ContactFormEmail">Email</label>
-                    <input class="form-control rounded-0" id="ContactFormEmail" name="contact[email]" type="email">
+                    <label for="ContactFormName">Cognome</label>
+                    <input class="form-control rounded-0" id="ContactFormName" name="contact[last_name]" type="text">
                 </div>
+
+            </div>
+            <div class="col-12">
+                <label for="ContactFormEmail">Email</label>
+                <input class="form-control rounded-0" id="ContactFormEmail" name="contact[email]" type="email">
             </div>
 
             <div class="col-12">
@@ -42,7 +47,7 @@
             </div>
 
 
-            <input class="btn btn-success w-100 mt-2 rounded-0" type="submit" value="Invia">
+            <input class="btn btn-dark w-100 mt-2 rounded-0" type="submit" value="Invia">
         {% endform %}
     </div>
 </div> 

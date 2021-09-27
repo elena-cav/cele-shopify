@@ -1,100 +1,107 @@
 <div class="container my-5">
-    <h1 class="lead">I miei indirizzi</h1>
-    <button class="btn btn-dark rounded-0 my-2" data-bs-target="#newAddressModal" data-bs-toggle="modal">Aggiungi un nuovo indirizzo</button>
-    <div class="row row-cols-md-4 row-cols-1 my-5 gx-2">
+    <h1 class="text-center">I miei indirizzi</h1>
+    <div class="col-md-12 text-center">
+        <button class="btn btn-dark rounded-0 my-2" data-bs-target="#newAddressModal" data-bs-toggle="modal">Aggiungi un nuovo indirizzo</button>
+        <button class="btn btn-dark rounded-0 my-2">
+            <a class="text-white" href="/account">Torna all'Account</a>
+        </button>
+    </div>
+
+
+    <div class="justify-content-center row row-cols-md-4 row-cols-1 my-5 gx-2">
         {% for address in customer.addresses %}
 
 
-        <div class="col">
-            <div class="card my-1 rounded-0 address-card d-flex flex-column text-center align-content-center justify-content-center">
-                {% if address == customer.default_address %}
-                <p class=" text-muted">Default</p>
-                {% endif %}
-                <div class="card-body">
-                    {{address | format_address}}
-                </div>
-                <div class="card-footer g-2 d-inline-flex align-content-center justify-content-center">
-                    <form action="/account/addresses/{{ address.id }}" data-confirm-message="Delete Address" method="post">
-                        <input name="_method" type="hidden" value="delete">
-                        <button class="mx-2 btn btn-light border-dark rounded-0">Cancella</button>
-
-
-                    </form>
-                    <button class="mx-2  btn btn-light border-dark rounded-0 " data-bs-target="#editAddressModal" data-bs-toggle="modal">Modifica</button>
-
-                </div>
-            </div>
-        </div>
-
-
-        <div aria-hidden="true" aria-labelledby="editAddressModalLabel" class="modal fade" id="editAddressModal" tabomdex="1">
-            {% form 'customer_address', address %}
-            <div class="modal-dialog">
-                <div class="modal-content rounded-0">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="newAddressModalLabel">Modifica indirizzo</h5>
-                        <button aria-label="Chiudi" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            <div class="col">
+                <div class="card my-1 rounded-0 address-card d-flex flex-column text-center align-content-center justify-content-center">
+                    {% if address == customer.default_address %}
+                        <p class=" text-muted">Default</p>
+                    {% endif %}
+                    <div class="card-body">
+                        {{address | format_address}}
                     </div>
-                    <div class="modal-body">
-                        <div class="col-12 mb-3">
-                            <label class="form-label" for="AddressFirstNameNew">Nome</label>
-                            <input required id="AddressFirstNameNew" type="text" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Inserisci il nome')" name="address[first_name]" value="{{ form.first_name }}" class="rounded-0 form-control">
+                    <div class="card-footer g-2 d-inline-flex align-content-center justify-content-center">
+                        <form action="/account/addresses/{{ address.id }}" data-confirm-message="Delete Address" method="post">
+                            <input name="_method" type="hidden" value="delete">
+                            <button class="mx-2 btn btn-light border-dark rounded-0">Cancella</button>
 
 
-                        </div>
-                        <div class="col-12 mb-3">
-                            <label class="form-label" for="AddressLastNameNew">Cognome</label>
-                            <input id="AddressLastNameNew" type="text" name="address[last_name]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Inserisci il cognome')" value="{{ form.last_name }}" class="rounded-0 form-control">
-                        </div>
-                        <div class="col-12 mb-3">
-                            <label class="form-label" for="AddressCompanyNew">Azienda</label>
-                            <input id="AddressCompanyNew" type="text" name="address[company]" value="{{ form.company }}" class="rounded-0 form-control">
-                        </div>
-                        <div class="col-12 mb-3">
-                            <label class="form-label" for="AddressAddress1New">Indirizzo</label>
-                            <input id="AddressAddress1New" type="text" name="address[address1]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Inserisci un indirizzo ')" value="{{ form.address1 }}" class="rounded-0 form-control">
-                        </div>
-                        <div class="col-12 mb-3">
-                            <label class="form-label" for="AddressAddress2New">Appartamento</label>
-                            <input id="AddressAddress2New" type="text" name="address[address2]" value="{{ form.address2 }}" class="rounded-0 form-control">
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-12 col-md-4 mb-3">
-                                <label class="form-label" for="AddressCityNew">Città</label>
-                                <input required id="AddressCityNew" type="text" name="address[city]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Inserisci una città')" value="{{ form.city }}" class="rounded-0 form-control">
-                            </div>
-                            <div class="col-12 col-md-4 mb-3">
-                                <label class="form-label" for="AddressCountryEdit">Stato</label>
-                                <select class="rounded-0 form-control" id="AddressCountryEdit" name="address[country]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Seleziona uno Stato')" required>{{ all_country_option_tags }}</select>
-                            </div>
-                            <div class="col-12 col-md-4 mb-3">
-                                <label class="form-label" for="AddressProvinceEdit">Provincia</label>
-                                <select class="rounded-0 form-control" disabled="disabled" id="AddressProvinceEdit" name="address[province]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Seleziona una Provincia')" required></select>
-                            </div>
-                        </div>
+                        </form>
+                        <button class="mx-2  btn btn-light border-dark rounded-0 " data-bs-target="#editAddressModal" data-bs-toggle="modal">Modifica</button>
 
-                        <div class="col-12 mb-3">
-                            <label class="form-label" for="AddressZipNew">CAP</label>
-                            <input required id="AddressZipNew" type="text" name="address[zip]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Inserisci una CAP')" value="{{ form.zip }}" class="rounded-0 form-control">
-                        </div>
-                        <div class="col-12 mb-3">
-                            <label class="form-label" for="AddressPhoneNew">Numero di telefono</label>
-                            <input id="AddressPhoneNew" type="text" name="address[phone]" value="{{ form.phone }}" class="rounded-0 form-control">
-                        </div>
-                        <p>
-                            {{ form.set_as_default_checkbox }}
-                            <label for="address_default_address_{{ form.id }}">Set address as default</label>
-                        </p>
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-dark rounded-0" type="submit">Salva</button>
                     </div>
                 </div>
             </div>
-            {% endform %}
-        </div>
+
+
+            <div aria-hidden="true" aria-labelledby="editAddressModalLabel" class="modal fade" id="editAddressModal" tabomdex="1">
+                {% form 'customer_address', address %}
+                    <div class="modal-dialog">
+                        <div class="modal-content rounded-0">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="newAddressModalLabel">Modifica indirizzo</h5>
+                                <button aria-label="Chiudi" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="col-12 mb-3">
+                                    <label class="form-label" for="AddressFirstNameNew">Nome</label>
+                                    <input required id="AddressFirstNameNew" type="text" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Inserisci il nome')" name="address[first_name]" value="{{ form.first_name }}" class="rounded-0 form-control">
+
+
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label class="form-label" for="AddressLastNameNew">Cognome</label>
+                                    <input id="AddressLastNameNew" type="text" name="address[last_name]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Inserisci il cognome')" value="{{ form.last_name }}" class="rounded-0 form-control">
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label class="form-label" for="AddressCompanyNew">Azienda</label>
+                                    <input id="AddressCompanyNew" type="text" name="address[company]" value="{{ form.company }}" class="rounded-0 form-control">
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label class="form-label" for="AddressAddress1New">Indirizzo</label>
+                                    <input id="AddressAddress1New" type="text" name="address[address1]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Inserisci un indirizzo ')" value="{{ form.address1 }}" class="rounded-0 form-control">
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label class="form-label" for="AddressAddress2New">Appartamento</label>
+                                    <input id="AddressAddress2New" type="text" name="address[address2]" value="{{ form.address2 }}" class="rounded-0 form-control">
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-12 col-md-4 mb-3">
+                                        <label class="form-label" for="AddressCityNew">Città</label>
+                                        <input required id="AddressCityNew" type="text" name="address[city]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Inserisci una città')" value="{{ form.city }}" class="rounded-0 form-control">
+                                    </div>
+                                    <div class="col-12 col-md-4 mb-3">
+                                        <label class="form-label" for="AddressCountryEdit">Stato</label>
+                                        <select class="rounded-0 form-control" id="AddressCountryEdit" name="address[country]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Seleziona uno Stato')" required>{{ all_country_option_tags }}</select>
+                                    </div>
+                                    <div class="col-12 col-md-4 mb-3">
+                                        <label class="form-label" for="AddressProvinceEdit">Provincia</label>
+                                        <select class="rounded-0 form-control" disabled="disabled" id="AddressProvinceEdit" name="address[province]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Seleziona una Provincia')" required></select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <label class="form-label" for="AddressZipNew">CAP</label>
+                                    <input required id="AddressZipNew" type="text" name="address[zip]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Inserisci una CAP')" value="{{ form.zip }}" class="rounded-0 form-control">
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label class="form-label" for="AddressPhoneNew">Numero di telefono</label>
+                                    <input id="AddressPhoneNew" type="text" name="address[phone]" value="{{ form.phone }}" class="rounded-0 form-control">
+                                </div>
+                                <p>
+                                    {{ form.set_as_default_checkbox }}
+                                    <label for="address_default_address_{{ form.id }}">Set address as default</label>
+                                </p>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-dark rounded-0" type="submit">Salva</button>
+                            </div>
+                        </div>
+                    </div>
+                {% endform %}
+            </div>
 
 
         {% endfor %}
@@ -104,67 +111,67 @@
 
 <div aria-hidden="true" aria-labelledby="newAddressModalLabel" class="modal fade" id="newAddressModal" tabomdex="1">
     {% form 'customer_address', customer.new_address%}
-    <div class="modal-dialog">
-        <div class="modal-content rounded-0">
-            <div class="modal-header">
-                <h5 class="modal-title" id="newAddressModalLabel">Aggiungi un nuovo indirizzo</h5>
-                <button aria-label="Chiudi" class="btn-close" data-bs-dismiss="modal" type="button"></button>
-            </div>
-            <div class="modal-body">
-                <div class="col-12 mb-3">
-                    <label class="form-label" for="AddressFirstNameNew">Nome</label>
-                    <input required id="AddressFirstNameNew" type="text" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Inserisci il nome')" name="address[first_name]" value="{{ form.first_name }}" class="rounded-0 form-control">
+        <div class="modal-dialog">
+            <div class="modal-content rounded-0">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newAddressModalLabel">Aggiungi un nuovo indirizzo</h5>
+                    <button aria-label="Chiudi" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-12 mb-3">
+                        <label class="form-label" for="AddressFirstNameNew">Nome</label>
+                        <input required id="AddressFirstNameNew" type="text" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Inserisci il nome')" name="address[first_name]" value="{{ form.first_name }}" class="rounded-0 form-control">
 
 
-                </div>
-                <div class="col-12 mb-3">
-                    <label class="form-label" for="AddressLastNameNew">Cognome</label>
-                    <input id="AddressLastNameNew" type="text" name="address[last_name]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Inserisci il cognome')" value="{{ form.last_name }}" class="rounded-0 form-control">
-                </div>
-                <div class="col-12 mb-3">
-                    <label class="form-label" for="AddressCompanyNew">Azienda</label>
-                    <input id="AddressCompanyNew" type="text" name="address[company]" value="{{ form.company }}" class="rounded-0 form-control">
-                </div>
-                <div class="col-12 mb-3">
-                    <label class="form-label" for="AddressAddress1New">Indirizzo</label>
-                    <input id="AddressAddress1New" type="text" name="address[address1]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Inserisci un indirizzo ')" value="{{ form.address1 }}" class="rounded-0 form-control">
-                </div>
-                <div class="col-12 mb-3">
-                    <label class="form-label" for="AddressAddress2New">Appartamento</label>
-                    <input id="AddressAddress2New" type="text" name="address[address2]" value="{{ form.address2 }}" class="rounded-0 form-control">
-                </div>
-                <div class="row mb-3">
-                    <div class="col-12 col-md-4 mb-3">
-                        <label class="form-label" for="AddressCityNew">Città</label>
-                        <input required id="AddressCityNew" type="text" name="address[city]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Inserisci una città')" value="{{ form.city }}" class="rounded-0 form-control">
                     </div>
-                    <div class="col-12 col-md-4 mb-3">
-                        <label class="form-label" for="AddressCountryNew">Stato</label>
-                        <select class="rounded-0 form-control" id="AddressCountryNew" name="address[country]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Seleziona uno Stato')" required>{{ all_country_option_tags }}</select>
+                    <div class="col-12 mb-3">
+                        <label class="form-label" for="AddressLastNameNew">Cognome</label>
+                        <input id="AddressLastNameNew" type="text" name="address[last_name]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Inserisci il cognome')" value="{{ form.last_name }}" class="rounded-0 form-control">
                     </div>
-                    <div class="col-12 col-md-4 mb-3">
-                        <label class="form-label" for="AddressProvinceNew">Provincia</label>
-                        <select class="rounded-0 form-control" disabled="disabled" id="AddressProvinceNew" name="address[province]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Seleziona una Provincia')" required></select>
+                    <div class="col-12 mb-3">
+                        <label class="form-label" for="AddressCompanyNew">Azienda</label>
+                        <input id="AddressCompanyNew" type="text" name="address[company]" value="{{ form.company }}" class="rounded-0 form-control">
                     </div>
+                    <div class="col-12 mb-3">
+                        <label class="form-label" for="AddressAddress1New">Indirizzo</label>
+                        <input id="AddressAddress1New" type="text" name="address[address1]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Inserisci un indirizzo ')" value="{{ form.address1 }}" class="rounded-0 form-control">
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label class="form-label" for="AddressAddress2New">Appartamento</label>
+                        <input id="AddressAddress2New" type="text" name="address[address2]" value="{{ form.address2 }}" class="rounded-0 form-control">
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-4 mb-3">
+                            <label class="form-label" for="AddressCityNew">Città</label>
+                            <input required id="AddressCityNew" type="text" name="address[city]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Inserisci una città')" value="{{ form.city }}" class="rounded-0 form-control">
+                        </div>
+                        <div class="col-12 col-md-4 mb-3">
+                            <label class="form-label" for="AddressCountryNew">Stato</label>
+                            <select class="rounded-0 form-control" id="AddressCountryNew" name="address[country]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Seleziona uno Stato')" required>{{ all_country_option_tags }}</select>
+                        </div>
+                        <div class="col-12 col-md-4 mb-3">
+                            <label class="form-label" for="AddressProvinceNew">Provincia</label>
+                            <select class="rounded-0 form-control" disabled="disabled" id="AddressProvinceNew" name="address[province]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Seleziona una Provincia')" required></select>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <label class="form-label" for="AddressZipNew">CAP</label>
+                        <input required id="AddressZipNew" type="text" name="address[zip]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Inserisci una CAP')" value="{{ form.zip }}" class="rounded-0 form-control">
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label class="form-label" for="AddressPhoneNew">Numero di telefono</label>
+                        <input id="AddressPhoneNew" type="text" name="address[phone]" value="{{ form.phone }}" class="rounded-0 form-control">
+                    </div>
+
                 </div>
+                <div class="modal-footer">
 
-                <div class="col-12 mb-3">
-                    <label class="form-label" for="AddressZipNew">CAP</label>
-                    <input required id="AddressZipNew" type="text" name="address[zip]" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Inserisci una CAP')" value="{{ form.zip }}" class="rounded-0 form-control">
+
+                    <button class="btn btn-dark rounded-0" type="submit">Crea indirizzo</button>
+
                 </div>
-                <div class="col-12 mb-3">
-                    <label class="form-label" for="AddressPhoneNew">Numero di telefono</label>
-                    <input id="AddressPhoneNew" type="text" name="address[phone]" value="{{ form.phone }}" class="rounded-0 form-control">
-                </div>
-
-            </div>
-            <div class="modal-footer">
-
-
-                <button class="btn btn-dark rounded-0" type="submit">Crea indirizzo</button>
-
             </div>
         </div>
-    </div>
     {% endform %}
 </div>
