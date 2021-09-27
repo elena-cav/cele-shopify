@@ -7,7 +7,7 @@
         </div>
 
         <div class="mobile-nav">
-            <button class="menu-btn pull-right">
+            <button class="menu-btn pull-right" name="navigation">
                 <div class="menu-btn__burger"></div>
             </button>
         </div>
@@ -16,7 +16,7 @@
         <nav class="nav-bar">
             <ul class="nav-menu">
                 <li class="menu-item has-sub-menu">
-                    <a href="#">Donna</a>
+                    <a>Donna</a>
                     <ul class="sub-menu">
                         <li class="menu-item">
                             <a href={{routes.all_products_collection_url }}>Abbigliamento</a>
@@ -56,8 +56,8 @@
                     <ul class="sub-menu">
                         <li class="menu-item">
                             <a href="/products/consulenza-online?variant=40425888415916">Consulenza</a>
-                            <a href="">La nostra storia</a>
-                            <a href="">Il negozio</a>
+                            <a href="/pages/chi-siamo-1">La nostra storia</a>
+                            <a href="/pages/il-negozio">Il negozio</a>
 
                         </li>
 
@@ -72,11 +72,13 @@
 
         <div class="icons-section">
             <div class="search-bar">
-                <img class="search-bar-icon" alt="" src="{{ 'search.svg' | asset_url }}">
+                <button id="close-searchbar"><img class="close-search-bar-icon" alt="" src="{{ 'close.svg' | asset_url }}"></button>
+
                 <form action="/search" method="GET" role="search">
                     <input class="px-1 search-bar-input" id="searchInputField" placeholder="Cerca per parola chiave" type="text" name="q" value="{{ search.terms | escape }}">
+                    <button><img class="search-bar-icon" alt="" src="{{ 'search.svg' | asset_url }}"></button>
+
                 </form>
-                <button id="close-searchbar"><img class="close-search-bar-icon" alt="" src="{{ 'close.svg' | asset_url }}"></button>
 
 
             </div>

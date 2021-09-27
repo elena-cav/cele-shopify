@@ -36,7 +36,7 @@
                         {%- for filter in collection.filters -%}
                             <form>
                                 <div class="dropdown rounded-0">
-                                    <button aria-expanded="false" class="text-uppercase btn btn-secondary dropdown-toggle dropdown-btn font-weight-bold " data-bs-toggle="dropdown" id="dropdownMenuButton-{{forloop.index}}" type="button">
+                                    <button aria-expanded="false" class="text-uppercase p-0 btn btn-secondary dropdown-toggle dropdown-btn font-weight-bold " data-bs-toggle="dropdown" id="dropdownMenuButton-{{forloop.index}}" type="button">
                                         {{filter.label}}
                                     </button>
                                     <ul aria-labelledby="dropdownMenuButton-{{forloop.index}}" class="dropdown-menu checkbox-menu" id="dropdownMenu-{{forloop.index}}">

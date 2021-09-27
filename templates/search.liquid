@@ -1,7 +1,7 @@
 {% paginate search.results by 10 %}
     <div class="container products-page">
         <div class="row">
-            <h1 class="text-center text-sm ">Risultati della ricerca</h1>
+            <h1 class="text-center">Risultati della ricerca</h1>
         </div>
         <div class="product-list-container">
             {% if search.performed %}
@@ -26,9 +26,14 @@
                                 {% endif %}
                                 <a href={{item.url | within: collection}}>
                                     <div class="mt-2 product-detail-container">
-                                        <p class="">{{item.vendor}}</p>
+                                        <p class="vendor">{{item.vendor}}</p>
                                         <p class="">{{ item.title }}</p>
-                                        <p class="price">{{ item.price | money_without_trailing_zeros }}</p>
+                                        <div class="d-flex flex-row">
+                                            <p class="price">{{ item.price | money_without_trailing_zeros }}</p>
+                                            {% if item.compare_at_price %}
+                                                <del>{{item.compare_at_price | money_without_trailing_zeros}}</del>
+                                            {% endif %}
+                                        </div>
                                     </div>
                                 </a>
                             </a>

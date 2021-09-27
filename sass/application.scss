@@ -238,13 +238,12 @@ ul {
   del {
     font-size: 0.8rem;
   }
-
-  .price {
-    font-weight: bold;
-    margin-right: 4px;
-  }
 }
 
+.price {
+  font-weight: bold;
+  margin-right: 4px;
+}
 .vendor {
   text-transform: capitalize;
   font-family: "Courier New", Courier, monospace;
@@ -295,7 +294,7 @@ ul {
     padding: 15px 15px 15px 120px;
     margin: 0 auto;
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: space-between;
     @media screen and (max-width: 840px) {
       padding: 15px;
@@ -352,7 +351,6 @@ ul {
           &.has-sub-menu {
             > a {
               position: relative;
-              // padding-right: 35px;
               &:after {
                 content: "+";
                 display: block;
@@ -364,7 +362,8 @@ ul {
                 font-size: 18px;
                 font-weight: bold;
                 @media screen and (max-width: 840px) {
-                  right: 100px;
+                  right: 33%;
+                  font-size: 22px;
                 }
               }
               &:hover {
@@ -425,6 +424,7 @@ ul {
           pointer-events: all;
         }
         .nav-menu {
+          font-size: 1.3rem;
           flex-direction: column;
           padding-top: 30px;
           text-align: right;
@@ -547,22 +547,30 @@ ul {
 
 .search-bar {
   display: inline-block;
+  #close-searchbar {
+    display: none;
+  }
   .search-bar-icon {
     display: none;
   }
   input {
     font-size: 0.9rem;
+
+    &:focus-visible {
+      outline: none;
+    }
   }
   @media screen and (max-width: 840px) {
     background-color: $bg;
-    height: 175px;
+    height: 250px;
     width: 100%;
     display: flex;
     position: fixed;
     top: 0;
     left: 0;
     justify-content: center;
-    transform: translateY(-200px);
+    transform: translateY(-260px);
+    border-bottom: 0.2px solid #d7d7d8;
     transition: all 0.5s ease-in-out;
     z-index: 1001;
     align-items: center;
@@ -582,6 +590,7 @@ ul {
     .search-bar-input {
       border: none;
       margin: 0 1rem 0 1rem;
+      padding: 10px !important;
     }
   }
 }
@@ -819,8 +828,16 @@ ul {
       .filter-subsection {
         display: flex;
         flex-direction: column;
+
+        button {
+          font-size: 0.9rem;
+          @media screen and (min-width: 990px) {
+            font-size: 0.7rem;
+          }
+        }
         @media screen and (min-width: 990px) {
           flex-direction: row;
+          margin-left: 12px;
         }
       }
       p {
@@ -834,9 +851,13 @@ ul {
     }
     .delete-filters {
       font-weight: 700;
-      font-size: 0.7rem;
+      font-size: 0.9rem;
       padding-left: 12px;
       padding-top: 12px;
+
+      @media screen and (min-width: 990px) {
+        font-size: 0.7rem;
+      }
     }
     #close-filters-icon {
       width: 2rem;
@@ -849,24 +870,43 @@ ul {
     }
     .sort-form {
       background-color: $bg;
-      font-size: 0.7rem;
+      font-size: 0.9rem;
       font-weight: 700;
       cursor: pointer;
       width: 18rem;
-      padding-left: 12px;
+      padding: 12px;
       color: black;
-      option {
+
+      @media screen and (min-width: 990px) {
+        padding: 0 0 0 12px;
         font-size: 0.7rem;
+      }
+      option {
+        font-size: 0.9rem;
         font-weight: 700;
+
+        @media screen and (min-width: 990px) {
+          font-size: 0.7rem;
+        }
       }
     }
     .dropdown {
+      padding: 12px;
+
+      @media screen and (min-width: 990px) {
+        padding: 0px;
+      }
+
       .dd-label {
-        font-size: 0.7rem;
+        font-size: 0.9rem;
+
+        @media screen and (min-width: 990px) {
+          font-size: 0.7rem;
+        }
       }
       .dropdown-menu {
-        padding: 0.5rem;
         border-radius: 0;
+        padding: 0.5rem;
       }
       .btn-secondary,
       .btn-check:focus + .btn-secondary,
@@ -875,9 +915,13 @@ ul {
         background-color: $bg;
         border: none;
         border-radius: 0;
-        font-size: 0.7rem;
+        font-size: 0.9rem;
         font-weight: 700;
         box-shadow: 0 0 0 0;
+
+        @media screen and (min-width: 990px) {
+          font-size: 0.7rem;
+        }
       }
       .btn-check:focus + .btn-secondary,
       .btn-secondary:focus {
@@ -1109,9 +1153,13 @@ footer {
 
 //page template
 .page-template {
+  h1 {
+    margin-top: 1rem;
+  }
   img {
     max-height: 15rem;
     width: 100%;
+    object-position: center;
   }
   .subtitle {
     font-weight: 700;

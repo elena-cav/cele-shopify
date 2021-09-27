@@ -1,16 +1,23 @@
 <div class="page-template container my-3">
-    {% for block in section.blocks %} {% case block.type %} {% when 'page_title' %}
-    <h1 class="text-uppercase">{{ block.settings.title }}</h1>
-    {% when 'page_image' %}
-    <img src="{{ block.settings.image | img_url: 'small' }}" alt="" /> {% when 'page_subtitle' %}
-    <p class="subtitle mt-1">{{ block.settings.subtitle }}</p>
-    {% when 'page_content' %}
-    <div class="my-1">
-        <p>{{ block.settings.content }}</p>
-    </div>
-    {% else %} {% endcase %} {% endfor %}
+    {% for block in section.blocks %}
+        {% case block.type %}
+            {% when 'page_title' %}
+                <h1 class="text-uppercase">{{ block.settings.title }}</h1>
+            {% when 'page_image' %}
+                <img src="{{ block.settings.image | img_url: 'master' }}" alt=""/>
+            {% when 'page_subtitle' %}
+                <p class="subtitle mt-1">{{ block.settings.subtitle }}</p>
+            {% when 'page_content' %}
+                <div class="my-1">
+                    <p>{{ block.settings.content }}</p>
+                </div>
+            {% else %}
+        {% endcase %}
+    {% endfor %}
 </div>
 
-{% schema %} { "name": "Impostazioni di pagina", "blocks": [ { "type": "page_title", "name": "Titolo", "settings": [ { "type": "text", "id": "title", "label": "Titolo" } ] },{ "type": "page_subtitle", "name": "Sottotitolo", "settings": [ { "type": "text",
+{% schema %}
+{ "name": "Impostazioni di pagina", "blocks": [ { "type": "page_title", "name": "Titolo", "settings": [ { "type": "text", "id": "title", "label": "Titolo" } ] },{ "type": "page_subtitle", "name": "Sottotitolo", "settings": [ { "type": "text",
 "id": "subtitle", "label": "Sottotitolo" } ] }, { "type": "page_image", "name": "Immagine", "limit": 1, "settings": [ { "type": "image_picker", "id": "image", "label": "Immagine" } ] }, { "type": "page_content", "name": "Contenuto", "settings": [ { "type":
-"richtext", "id": "content", "label": "Testo" } ] } ] } {% endschema %}
+"richtext", "id": "content", "label": "Testo" } ] } ] }
+{% endschema %}
