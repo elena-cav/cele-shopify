@@ -2,14 +2,12 @@
     <a href="{{ product.url }}">
         {% if image != blank %}
             <div class="img-container">
-
                 <a href={{product.url}}>
-                    <img class="product-list-image" src="{{ image | img_url: 'medium' }}" alt="{{ product.title }}">
+                    <img class="product-list-image" src="{{ image | img_url: 'medium' }}" loading="lazy" alt="{{ product.title }}">
                     {% if product.compare_at_price != null%}
                         <p>Saldi</p>
                     {% endif %}
                 </a>
-
             </div>
         {% else %}
             <div class="img-container">
@@ -19,7 +17,6 @@
                         <p>Saldi</p>
                     {% endif %}
                 </a>
-
             </div>
         {% endif %}
         <a href={{product.url}}>

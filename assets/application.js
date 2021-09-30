@@ -328,3 +328,7 @@ $(document).ready(function () {
     $("#carouselModal").modal("hide");
   });
 });
+
+// $(document).ready(function () {
+//   $("img.lazyload").lazyload();
+// });

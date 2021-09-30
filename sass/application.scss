@@ -1,8 +1,8 @@
 $bg: #faf9f8;
 $grey: #9c9798;
 $linkgrey: #5a5a5a;
-$accentdark: hsl(347deg 75% 54%);
-$accentlight: rgb(242, 230, 227);
+$accentdark: #e12d54;
+$accentlight: #f2e6e3;
 body {
   font-family: "Karla", sans-serif;
   background-color: $bg;
@@ -219,6 +219,10 @@ ul {
   height: 250px;
   position: relative;
 
+  .product-list-image {
+    width: auto;
+  }
+
   p {
     position: absolute;
     bottom: 0;
@@ -290,7 +294,6 @@ ul {
     box-shadow: 0 0 0 0.3rem #ff9f9f;
   }
   .nav-container {
-    // max-width: 960px;
     padding: 15px 15px 15px 120px;
     margin: 0 auto;
     display: flex;
@@ -338,19 +341,29 @@ ul {
         list-style-type: none;
         .menu-item {
           position: relative;
-          a {
+          a,
+          p {
             display: block;
             color: black;
             text-decoration: none;
             padding: 10px 25px;
+            cursor: pointer;
+
             &:hover {
               color: black;
               background-color: #eaeaea;
+              @media screen and (max-width: 840px) {
+                background: none;
+              }
             }
           }
+
           &.has-sub-menu {
-            > a {
+            > a,
+            p {
               position: relative;
+              cursor: pointer;
+
               &:after {
                 content: "+";
                 display: block;
@@ -360,9 +373,11 @@ ul {
                 transform: translateY(-50%);
                 color: $accentdark;
                 font-size: 18px;
+                cursor: pointer;
+
                 font-weight: bold;
                 @media screen and (max-width: 840px) {
-                  right: 33%;
+                  right: 36%;
                   font-size: 22px;
                 }
               }
@@ -408,12 +423,14 @@ ul {
         }
       }
       @media screen and (max-width: 840px) {
+        padding-top: 46px;
+
         display: block;
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
-        min-height: 200vh;
+        height: 100vh;
         z-index: 999;
         background-color: #f5f5f5;
         opacity: 0;
@@ -424,10 +441,15 @@ ul {
           pointer-events: all;
         }
         .nav-menu {
+          overflow-y: auto;
+          height: 100%;
           font-size: 1.3rem;
           flex-direction: column;
-          padding-top: 30px;
           text-align: right;
+
+          #first {
+            padding: 0 25px 10px 25px;
+          }
           .has-sub-menu {
             > .sub-menu {
               display: none;
@@ -458,9 +480,6 @@ ul {
     height: 80px;
     cursor: pointer;
     z-index: 1000;
-    // position: fixed;
-    // top: 35px;
-    // left: 25px;
   }
   .menu-btn__burger {
     z-index: 10;
@@ -1190,6 +1209,9 @@ footer {
   }
 }
 
+.table-responsive {
+  font-size: 0.8rem;
+}
 // address
 .address-card {
   min-height: 220px;
@@ -1201,9 +1223,16 @@ footer {
 }
 
 #announcement-bar-with-slider ~ main {
-  padding-top: 55px;
+  padding-top: 70px;
 }
 
 #announcement-bar-with-slider ~ .search-bar {
   height: 165px;
+}
+
+.search-results {
+  text-transform: initial;
+}
+.content-box {
+  border-radius: 0;
 }
