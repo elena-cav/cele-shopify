@@ -9,6 +9,10 @@ body {
   }
 }
 
+.body-nomodal {
+  overflow-y: initial;
+}
+
 .form-group.is-invalid .invalid-feedback {
   display: block;
 }

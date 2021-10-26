@@ -1,96 +1,96 @@
 // Put your application javascript here
-if (document.getElementById("sort_by") !== null) {
-  document.querySelector("#sort_by").addEventListener("change", function (e) {
+if (document.getElementById('sort_by') !== null) {
+  document.querySelector('#sort_by').addEventListener('change', function (e) {
     const url = new URL(window.location.href);
-    url.searchParams.set("sort_by", e.currentTarget.value);
+    url.searchParams.set('sort_by', e.currentTarget.value);
     window.location = url.href;
   });
 }
 
-if (document.getElementById("AddressCountryNew") != null) {
+if (document.getElementById('AddressCountryNew') != null) {
   document
-    .getElementById("AddressCountryNew")
-    .addEventListener("change", function (e) {
+    .getElementById('AddressCountryNew')
+    .addEventListener('change', function (e) {
       var provinces =
-        this.options[this.selectedIndex].getAttribute("data-provinces");
-      var provinceSelector = document.getElementById("AddressProvinceNew");
+        this.options[this.selectedIndex].getAttribute('data-provinces');
+      var provinceSelector = document.getElementById('AddressProvinceNew');
       var provinceArray = JSON.parse(provinces);
 
       if (provinceArray.length < 1) {
-        provinceSelector.setAttribute("disabled", "disabled");
+        provinceSelector.setAttribute('disabled', 'disabled');
       } else {
-        provinceSelector.removeAttribute("disabled");
+        provinceSelector.removeAttribute('disabled');
       }
 
-      provinceSelector.innerHTML = "";
-      var options = "";
+      provinceSelector.innerHTML = '';
+      var options = '';
       for (var i = 0; i < provinceArray.length; i++) {
         options +=
           '<option value="' +
           provinceArray[i][0] +
           '">' +
           provinceArray[i][0] +
-          "</option>";
+          '</option>';
       }
 
       provinceSelector.innerHTML = options;
     });
 }
 
-if (document.getElementById("AddressCountryEdit") != null) {
+if (document.getElementById('AddressCountryEdit') != null) {
   document
-    .getElementById("AddressCountryEdit")
-    .addEventListener("change", function (e) {
+    .getElementById('AddressCountryEdit')
+    .addEventListener('change', function (e) {
       var provinces =
-        this.options[this.selectedIndex].getAttribute("data-provinces");
-      var provinceSelector = document.getElementById("AddressProvinceEdit");
+        this.options[this.selectedIndex].getAttribute('data-provinces');
+      var provinceSelector = document.getElementById('AddressProvinceEdit');
       var provinceArray = JSON.parse(provinces);
 
       if (provinceArray.length < 1) {
-        provinceSelector.setAttribute("disabled", "disabled");
+        provinceSelector.setAttribute('disabled', 'disabled');
       } else {
-        provinceSelector.removeAttribute("disabled");
+        provinceSelector.removeAttribute('disabled');
       }
 
-      provinceSelector.innerHTML = "";
-      var options = "";
+      provinceSelector.innerHTML = '';
+      var options = '';
       for (var i = 0; i < provinceArray.length; i++) {
         options +=
           '<option value="' +
           provinceArray[i][0] +
           '">' +
           provinceArray[i][0] +
-          "</option>";
+          '</option>';
       }
 
       provinceSelector.innerHTML = options;
     });
 }
 
-if (document.getElementById("filter-btn") != null) {
-  document.getElementById("filter-btn").addEventListener("click", function (e) {
-    const filters = document.querySelector(".filters-container");
-    filters.classList.add("show");
+if (document.getElementById('filter-btn') != null) {
+  document.getElementById('filter-btn').addEventListener('click', function (e) {
+    const filters = document.querySelector('.filters-container');
+    filters.classList.add('show');
   });
 }
 
-if (document.getElementById("close-filters-icon") != null) {
+if (document.getElementById('close-filters-icon') != null) {
   document
-    .getElementById("close-filters-icon")
-    .addEventListener("click", function (e) {
-      const filters = document.querySelector(".filters-container");
-      filters.classList.remove("show");
+    .getElementById('close-filters-icon')
+    .addEventListener('click', function (e) {
+      const filters = document.querySelector('.filters-container');
+      filters.classList.remove('show');
     });
 }
 
-if (document.getElementById("forgotPassword") != null) {
+if (document.getElementById('forgotPassword') != null) {
   document
-    .getElementById("forgotPassword")
-    .addEventListener("click", function (e) {
-      const element = document.querySelector("#forgot_password_form");
-      if (element.classList.contains("d-none")) {
-        element.classList.remove("d-none");
-        element.classList.add("d-block");
+    .getElementById('forgotPassword')
+    .addEventListener('click', function (e) {
+      const element = document.querySelector('#forgot_password_form');
+      if (element.classList.contains('d-none')) {
+        element.classList.remove('d-none');
+        element.classList.add('d-block');
       }
     });
 }
@@ -173,27 +173,27 @@ if (document.getElementById("forgotPassword") != null) {
 //   updateCart();
 // });
 function updateCart() {
-  fetch("/cart")
+  fetch('/cart')
     .then((resp) => resp.json())
     .then((data) => {
       console.log(
-        "DATA",
+        'DATA',
         data
       )(
-        (document.getElementById("numberOfCartItems").innerHTML =
+        (document.getElementById('numberOfCartItems').innerHTML =
           data.items.length)
       );
     })
     .catch((err) => console.error(err));
 }
 
-const predictiveSearchInput = document.getElementById("searchInputField");
+const predictiveSearchInput = document.getElementById('searchInputField');
 
 let timer;
-const offcanvasSearch = document.getElementById("offcanvasSearchResult");
+const offcanvasSearch = document.getElementById('offcanvasSearchResult');
 const bsOffcanvas = new bootstrap.Offcanvas(offcanvasSearch);
 if (predictiveSearchInput !== null) {
-  predictiveSearchInput.addEventListener("input", () => {
+  predictiveSearchInput.addEventListener('input', () => {
     clearTimeout(timer);
     if (predictiveSearchInput.value) {
       timer = setTimeout(fetchPredictiveSearch, 3000);
@@ -208,24 +208,24 @@ function fetchPredictiveSearch() {
     .then((res) => res.json())
     .then((data) => {
       const products = data.resources.results.products;
-      document.getElementById("search_results_body").innerHTML = "";
+      document.getElementById('search_results_body').innerHTML = '';
 
       if (products.length === 0) {
         document.getElementById(
-          "search_results_body"
+          'search_results_body'
         ).innerHTML += `<div><h5>Non ci sono prodotti che corrispondono alla ricerca</h5></div>`;
       } else {
         products.forEach((product) => {
-          console.log("PRODUCT", product);
+          console.log('PRODUCT', product);
           const price =
-            product.compare_at_price_max != "0.00"
+            product.compare_at_price_max != '0.00'
               ? `<div class="d-flex flex-row">
             <p class="card-text price">€${product.price}</p>
             <del class="card-text">${product.compare_at_price_max}</del>
             </div>`
               : `<p class="card-text price">€${product.price}</p>`;
 
-          document.getElementById("search_results_body").innerHTML += `
+          document.getElementById('search_results_body').innerHTML += `
           <a href="${product.url}">
         <div class="search-suggestions card" style="width: 19rem;">
             <img src="${product.image} class="card-img-top">
@@ -248,28 +248,28 @@ function fetchPredictiveSearch() {
     });
 }
 
-const menu_btn = document.querySelector(".menu-btn");
-const navbar = document.querySelector(".nav-bar");
+const menu_btn = document.querySelector('.menu-btn');
+const navbar = document.querySelector('.nav-bar');
 
-menu_btn.addEventListener("click", toggleMenu);
+menu_btn.addEventListener('click', toggleMenu);
 
 function toggleMenu() {
-  navbar.classList.toggle("is-active");
-  menu_btn.classList.toggle("open");
+  navbar.classList.toggle('is-active');
+  menu_btn.classList.toggle('open');
 }
 
-const search_icon = document.querySelector(".search-icon");
-const search_bar = document.querySelector(".search-bar");
-const close_search_bar = document.getElementById("close-searchbar");
-search_icon.addEventListener("click", openSearchBar);
-close_search_bar.addEventListener("click", closeSearchBar);
+const search_icon = document.querySelector('.search-icon');
+const search_bar = document.querySelector('.search-bar');
+const close_search_bar = document.getElementById('close-searchbar');
+search_icon.addEventListener('click', openSearchBar);
+close_search_bar.addEventListener('click', closeSearchBar);
 
 function openSearchBar() {
-  search_bar.classList.add("is-active");
+  search_bar.classList.add('is-active');
 }
 
 function closeSearchBar() {
-  search_bar.classList.remove("is-active");
+  search_bar.classList.remove('is-active');
 }
 
 // var waypoint = new Waypoint({
@@ -279,25 +279,25 @@ function closeSearchBar() {
 //   }
 // })
 
-$(".image-zoomable")
+$('.image-zoomable')
   // tile mouse actions
-  .on("mouseover", function () {
+  .on('mouseover', function () {
     $(this)
-      .children(".img-product")
-      .css({ transform: "scale(" + $(this).attr("data-scale") + ")" });
+      .children('.img-product')
+      .css({ transform: 'scale(' + $(this).attr('data-scale') + ')' });
   })
-  .on("mouseout", function () {
-    $(this).children(".img-product").css({ transform: "scale(1)" });
+  .on('mouseout', function () {
+    $(this).children('.img-product').css({ transform: 'scale(1)' });
   })
-  .on("mousemove", function (e) {
+  .on('mousemove', function (e) {
     $(this)
-      .children(".img-product")
+      .children('.img-product')
       .css({
-        "transform-origin":
+        'transform-origin':
           ((e.pageX - $(this).offset().left) / $(this).width()) * 100 +
-          "% " +
+          '% ' +
           ((e.pageY - $(this).offset().top) / $(this).height()) * 100 +
-          "%",
+          '%',
       });
   });
 
@@ -306,26 +306,27 @@ $(".image-zoomable")
 //   options
 // );
 
-const productInfoAnchor = document.getElementById("testbutton");
+const productInfoAnchor = document.getElementById('testbutton');
 let productModal;
-if (document.getElementById("exampleModal") != null) {
+if (document.getElementById('exampleModal') != null) {
   productModal = new bootstrap.Modal(
-    document.getElementById("exampleModal"),
+    document.getElementById('exampleModal'),
     {}
   );
-  console.log("productModal", productModal);
+  console.log('productModal', productModal);
   productModal.show();
 }
 
 $(document).ready(function () {
-  $(".img-product").click(function () {
-    $("#carouselModal").modal("show");
+  $('.img-product').click(function () {
+    $('#carouselModal').modal('show');
   });
 });
 
 $(document).ready(function () {
-  $(".close-modal").click(function () {
-    $("#carouselModal").modal("hide");
+  $('.close-modal').click(function () {
+    $('#carouselModal').modal('hide');
+    $('body').addClass('body-nomodal');
   });
 });
 
