@@ -1,6 +1,41 @@
 {
-  "current": "Default",
+  "current": {
+    "checkout_header_image": "shopify:\/\/shop_images\/rack-of-womens-clothing.jpg",
+    "checkout_logo_image": "shopify:\/\/shop_images\/cele-sm.png",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "large",
+    "checkout_body_background_color": "#faf9f8",
+    "checkout_sidebar_background_color": "#f2e6e3",
+    "checkout_heading_font": "Helvetica Neue",
+    "checkout_body_font": "Helvetica Neue",
+    "checkout_accent_color": "#e12d54",
+    "checkout_button_color": "#000",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {}
+      },
+      "footer-section": {
+        "type": "footer-section",
+        "settings": {}
+      },
+      "product-template": {
+        "type": "product-template",
+        "settings": {
+          "dynamic_buttons_checkbox": false
+        }
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "16323307625bfc222c": {
+        "type": "shopify:\/\/apps\/multi-announcement-bar\/blocks\/app-embed\/3494d573-4520-4d27-b2eb-ba0554423f65",
+        "disabled": false,
+        "settings": {}
+      }
+    }
+  },
   "presets": {
-    "Default": { }
+    "Default": {}
   }
 }

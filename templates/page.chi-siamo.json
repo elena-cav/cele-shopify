@@ -1,36 +1,36 @@
 {
-    "sections": {
-        "template": {
-            "type": "template-page-chisiamo",
-            "blocks": {
-                "title": {
-                    "type": "page_title",
-                    "settings": {
-                        "type": "text"
-                    }
-                },
-                "subtitle": {
-                    "type": "page_subtitle",
-                    "settings": {
-                        "type": "text"
-                    }
-                },
-
-                "content": {
-                    "type": "page_content",
-                    "settings": {
-                        "type": "richtext"
-                    }
-                },
-                "image": {
-                    "type": "page_image",
-                    "settings": {
-                        "type": "image_picker"
-                    }
-                }
-            },
-            "block_order": ["image", "title", "date", "content"]
+  "sections": {
+    "template": {
+      "type": "template-page-chisiamo",
+      "blocks": {
+        "image": {
+          "type": "page_image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/a-hand-removes-a-sweater-from-a-clothing-rack.jpg"
+          }
+        },
+        "title": {
+          "type": "page_title",
+          "settings": {
+            "title": "Chi siamo"
+          }
+        },
+        "content": {
+          "type": "page_content",
+          "settings": {
+            "content": "<p>Suspendisse eget erat nulla. Donec at malesuada turpis, eget molestie neque. Maecenas varius augue et velit fermentum, sed tristique nulla auctor. <\/p><p>Suspendisse eget erat nulla. Donec at malesuada turpis, eget molestie neque. Maecenas varius augue et velit fermentum, sed tristique nulla auctor. Quisque nec sagittis lacus. Nulla porttitor turpis sed sem auctor fermentum. Vestibulum ut lectus elit. Ut posuere ultricies tellus, vitae feugiat augue commodo vel. Nunc mattis ex tortor, vel venenatis augue mollis eu. Integer efficitur interdum libero. Nullam ac ligula eu est rhoncus pulvinar a a elit. Aenean rutrum imperdiet orci. Pellentesque elementum lectus sit amet mi pharetra pharetra. Donec lectus metus, porta vel ultrices vitae, posuere sed nunc. Fusce congue quam et arcu blandit, a vestibulum libero pretium. Fusce lacinia magna sapien.<\/p><p>Suspendisse eget erat nulla. Donec at malesuada turpis, eget molestie neque. Maecenas varius augue et velit fermentum, sed tristique nulla auctor. <\/p>"
+          }
         }
-    },
-    "order": ["template"]
+      },
+      "block_order": [
+        "image",
+        "title",
+        "content"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "template"
+  ]
 }

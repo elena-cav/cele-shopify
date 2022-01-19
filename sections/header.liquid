@@ -22,24 +22,19 @@
                             <a href={{routes.all_products_collection_url }}>Abbigliamento</a>
                         </li>
                         <li class="menu-item has-sub-menu">
-                            <p>Designer</p>
+                            <p>Prodotto</p>
                             <ul class="sub-menu">
-                                {% for product_vendor in shop.vendors %}
-                                    <li class="menu-item">
-
-                                        {% if product_vendor != "Cele Boutique Alghero" %}
-                                            <a href="/collections/vendors?q={{product_vendor | downcase }}">{{ product_vendor }}</a>
-                                        {% endif %}
-
+                                {% for type in collection.all_types %}
+                                        <li class="menu-item">
+                                            {{ type | link_to_type }}
                                     </li>
                                 {% endfor %}
-
                             </ul>
                         </li>
 
                     </ul>
                 </li>
-                <li class="menu-item">
+                <!-- <li class="menu-item">
                     <a href="/collections/types?q=Accessori">Accessori</a>
                 </li>
                 <li class="menu-item">
@@ -49,7 +44,7 @@
                 <li class="menu-item">
                     <a href="/collections/saldi">Saldi
                     </a>
-                </li>
+                </li> -->
                 <li class="menu-item has-sub-menu">
                     <p>Scopri</p>
                     <ul class="sub-menu">

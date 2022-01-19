@@ -2,21 +2,46 @@
   "sections": {
     "hero": {
       "type": "hero",
+      "blocks": {
+        "a7ae9e72-b4e8-47f0-8bd1-7fa0a919dd42": {
+          "type": "main",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/nuova_export_1_1__new_4.jpg",
+            "title": "Titolo esempio",
+            "button_label": "Button",
+            "button_link": ""
+          }
+        },
+        "d9676399-c718-4666-bdaf-fe1b2fc71fb6": {
+          "type": "left",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/fashion-model-in-pink.jpg",
+            "title": "Titolo esempio",
+            "button_label": "Button",
+            "button_link": ""
+          }
+        },
+        "342b0df9-175b-4b9a-90db-20ccd8b5a5f1": {
+          "type": "right",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/FF-BANNER-NEW-WEBSITE14.jpg",
+            "title": "Titolo esempio",
+            "button_label": "Button",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "a7ae9e72-b4e8-47f0-8bd1-7fa0a919dd42",
+        "d9676399-c718-4666-bdaf-fe1b2fc71fb6",
+        "342b0df9-175b-4b9a-90db-20ccd8b5a5f1"
+      ],
       "settings": {
-        "image": "",
-        "title": "Benvenuti su Cele",
-        "description": "<p>We are happy to welcome you to our official store</p>",
-        "button_label": "Learn more",
-        "button_link": "https://google.com/"
+        "title": "Benvenuti su Cele"
       }
     }
   },
-  "order": ["hero"]
+  "order": [
+    "hero"
+  ]
 }
-// "featured-collection": {
-//   "type": "featured-collection",
-//   "settings": {
-//     "featured_collection": "summer-collection",
-//     "title": "Collezione in evidenza"
-//   }
-// }
